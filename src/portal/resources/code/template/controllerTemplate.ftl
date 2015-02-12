@@ -104,6 +104,8 @@ public class ${entityName}Controller {
         String id = entity.getId();
         if (CommonUtils.isNull(id)) {
             entity.setId(UUID.randomUUID().toString());
+            // 设置范围ID
+            entity.setScopeid(CommonBusiness.getInstance().getCurrentUserScopeId());
             ${entityName?uncap_first}Service.insert(entity);
         } else {
             ${entityName?uncap_first}Service.update(entity);

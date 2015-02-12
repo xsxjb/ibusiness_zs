@@ -5,7 +5,7 @@
 
   <head>
     <%@include file="/common/meta.jsp"%>
-    <title>测试练习表单列表</title>
+    <title>奖惩记录列表</title>
     <%@include file="/common/center.jsp"%>
     <script type="text/javascript">
 		var config = {
@@ -22,7 +22,7 @@
 		    },
 			selectedItemClass: 'selectedItem',
 			gridFormId: 'gridForm',
-	        exportUrl: 'test-export.do'
+	        exportUrl: 'rewards_punishments-export.do'
 		};
 
 		var table;
@@ -46,20 +46,21 @@
         <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">查询</h4></div>
           <div class="panel-body">
 	          <div id="search" class="content content-inner">
-				  <form name="cgForm" method="post" action="test-list.do" class="form-inline">
+				  <form name="cgForm" method="post" action="rewards_punishments-list.do" class="form-inline">
 				    <div class="form-group">
-				                <label for="code_table_name">姓名:</label>
+				                <label for="code_table_name">人事档案ID(姓名):</label>
 				                <input type="text" id="code_table_name" name="filter_LIKES_name" value="${param.filter_LIKES_name}">
 					    <button class="btn btn-primary btn-sm" onclick="document.cgForm.submit()"><span class="glyphicon glyphicon-search"></span>查询</button>
 					</div>
 				 </form>
 			  </div>
 		  </div>
-	   <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">测试练习表单列表</h4></div>
+	   <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">奖惩记录列表</h4></div>
        <div class="panel-body">
 		    <div class="pull-left">
-			    <button class="btn btn-primary btn-sm a-insert" href="test-input.do" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-tasks"></span>新建</button>
+			    <button class="btn btn-primary btn-sm a-insert" href="rewards_punishments-input.do" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-tasks"></span>新建</button>
 			    <button class="btn btn-primary btn-sm a-remove" onclick="table.removeAll()"><span class="glyphicon glyphicon-trash"></span>删除</button>
+			    <button class="btn btn-primary btn-sm" onclick="table.exportExcel()"><span class="glyphicon glyphicon-export"></span>导出Excel</button>
             
 			</div>
 			<div class="pull-right">
@@ -74,13 +75,19 @@
 		    <div class="m-clear"></div>
 	   </div>
 	   <div class="content">
-			<form id="gridForm" name="gridForm" method='post' action="test-remove.do" class="m-form-blank">
+			<form id="gridForm" name="gridForm" method='post' action="rewards_punishments-remove.do" class="m-form-blank">
 			  <table id="codeGrid" class="table table-hover table-striped">
 			      <thead>
 				      <tr>
 				        <th width="30" class="m-table-check"><input type="checkbox" name="checkAll" onchange="toggleSelectedItems(this.checked)"></th>
-					                <th class="sorting">姓名</th>
-					                <th class="sorting">备注</th>
+					                <th class="sorting">人事档案ID(姓名)</th>
+					                <th class="sorting">奖惩日期</th>
+					                <th class="sorting">奖惩类别</th>
+					                <th class="sorting">次数</th>
+					                <th class="sorting">工资奖罚</th>
+					                <th class="sorting">考核奖罚</th>
+					                <th class="sorting">提案人</th>
+					                <th class="sorting">具体说明</th>
 				        <th width="30">&nbsp;</th>
 				      </tr>
 				    </thead>
@@ -89,9 +96,15 @@
 					      <tr class="${status.index%2==1? 'active':''}">
 					        <td><input type="checkbox" class="selectedItem a-check" name="selectedItem" value="${item.id}"></td>
 						            <td>${item.name}</td>
+						            <td>${item.date}</td>
+						            <td>${item.type}</td>
+						            <td>${item.num}</td>
+						            <td>${item.salary}</td>
+						            <td>${item.assess}</td>
+						            <td>${item.motionman}</td>
 						            <td>${item.remark}</td>
 					        <td>
-					          <a href="test-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
+					          <a href="rewards_punishments-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
 					        </td>
 					      </tr>
 					      </c:forEach>

@@ -5,7 +5,7 @@
 
   <head>
     <%@include file="/common/meta.jsp"%>
-    <title>测试练习表单列表</title>
+    <title>人员调动表列表</title>
     <%@include file="/common/center.jsp"%>
     <script type="text/javascript">
 		var config = {
@@ -22,7 +22,7 @@
 		    },
 			selectedItemClass: 'selectedItem',
 			gridFormId: 'gridForm',
-	        exportUrl: 'test-export.do'
+	        exportUrl: 'person_move-export.do'
 		};
 
 		var table;
@@ -46,20 +46,21 @@
         <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">查询</h4></div>
           <div class="panel-body">
 	          <div id="search" class="content content-inner">
-				  <form name="cgForm" method="post" action="test-list.do" class="form-inline">
+				  <form name="cgForm" method="post" action="person_move-list.do" class="form-inline">
 				    <div class="form-group">
-				                <label for="code_table_name">姓名:</label>
+				                <label for="code_table_name">人事档案ID(姓名):</label>
 				                <input type="text" id="code_table_name" name="filter_LIKES_name" value="${param.filter_LIKES_name}">
 					    <button class="btn btn-primary btn-sm" onclick="document.cgForm.submit()"><span class="glyphicon glyphicon-search"></span>查询</button>
 					</div>
 				 </form>
 			  </div>
 		  </div>
-	   <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">测试练习表单列表</h4></div>
+	   <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">人员调动表列表</h4></div>
        <div class="panel-body">
 		    <div class="pull-left">
-			    <button class="btn btn-primary btn-sm a-insert" href="test-input.do" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-tasks"></span>新建</button>
+			    <button class="btn btn-primary btn-sm a-insert" href="person_move-input.do" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-tasks"></span>新建</button>
 			    <button class="btn btn-primary btn-sm a-remove" onclick="table.removeAll()"><span class="glyphicon glyphicon-trash"></span>删除</button>
+			    <button class="btn btn-primary btn-sm" onclick="table.exportExcel()"><span class="glyphicon glyphicon-export"></span>导出Excel</button>
             
 			</div>
 			<div class="pull-right">
@@ -74,12 +75,20 @@
 		    <div class="m-clear"></div>
 	   </div>
 	   <div class="content">
-			<form id="gridForm" name="gridForm" method='post' action="test-remove.do" class="m-form-blank">
+			<form id="gridForm" name="gridForm" method='post' action="person_move-remove.do" class="m-form-blank">
 			  <table id="codeGrid" class="table table-hover table-striped">
 			      <thead>
 				      <tr>
 				        <th width="30" class="m-table-check"><input type="checkbox" name="checkAll" onchange="toggleSelectedItems(this.checked)"></th>
-					                <th class="sorting">姓名</th>
+					                <th class="sorting">人事档案ID(姓名)</th>
+					                <th class="sorting">移动类别</th>
+					                <th class="sorting">调前部门</th>
+					                <th class="sorting">调后部门</th>
+					                <th class="sorting">调前职务</th>
+					                <th class="sorting">调后职务</th>
+					                <th class="sorting">原工资标准</th>
+					                <th class="sorting">现工资标准</th>
+					                <th class="sorting">调动日期</th>
 					                <th class="sorting">备注</th>
 				        <th width="30">&nbsp;</th>
 				      </tr>
@@ -89,9 +98,17 @@
 					      <tr class="${status.index%2==1? 'active':''}">
 					        <td><input type="checkbox" class="selectedItem a-check" name="selectedItem" value="${item.id}"></td>
 						            <td>${item.name}</td>
+						            <td>${item.category}</td>
+						            <td>${item.beforesection}</td>
+						            <td>${item.nowsection}</td>
+						            <td>${item.beforejob}</td>
+						            <td>${item.nowjob}</td>
+						            <td>${item.oldstandard}</td>
+						            <td>${item.newstandard}</td>
+						            <td>${item.movedate}</td>
 						            <td>${item.remark}</td>
 					        <td>
-					          <a href="test-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
+					          <a href="person_move-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
 					        </td>
 					      </tr>
 					      </c:forEach>

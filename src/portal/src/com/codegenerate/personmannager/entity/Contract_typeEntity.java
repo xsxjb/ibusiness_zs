@@ -1,4 +1,4 @@
-package com.codegenerate.test.entity;
+package com.codegenerate.personmannager.entity;
 
 import java.util.Date;
 
@@ -13,23 +13,55 @@ import javax.persistence.SequenceGenerator;
 
 /**   
  * @Title: Entity
- * @Description: 测试练习表页面
+ * @Description: 合同类型页面
  * @author JiangBo
  *
  */
 @Entity
-@Table(name = "IB_TEST")
-public class TestEntity implements java.io.Serializable {
+@Table(name = "IB_CONTRACT_TYPE")
+public class Contract_typeEntity implements java.io.Serializable {
     private static final long serialVersionUID = 0L;
+	/**typename*/
+	private java.lang.String typename;
+	/**typedescribe*/
+	private java.lang.String typedescribe;
 	/**id*/
 	private java.lang.String id;
 	/**scopeid*/
 	private java.lang.String scopeid;
-	/**name*/
-	private java.lang.String name;
-	/**remark*/
-	private java.lang.String remark;
 	
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  typename
+	 */
+	@Column(name ="TYPENAME",nullable=true,length=32)
+	public java.lang.String getTypename(){
+		return this.typename;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  typename
+	 */
+	public void setTypename(java.lang.String typename){
+		this.typename = typename;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  typedescribe
+	 */
+	@Column(name ="TYPEDESCRIBE",nullable=true,length=32)
+	public java.lang.String getTypedescribe(){
+		return this.typedescribe;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  typedescribe
+	 */
+	public void setTypedescribe(java.lang.String typedescribe){
+		this.typedescribe = typedescribe;
+	}
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  id
@@ -63,37 +95,5 @@ public class TestEntity implements java.io.Serializable {
 	 */
 	public void setScopeid(java.lang.String scopeid){
 		this.scopeid = scopeid;
-	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  name
-	 */
-	@Column(name ="NAME",nullable=true,length=64)
-	public java.lang.String getName(){
-		return this.name;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  name
-	 */
-	public void setName(java.lang.String name){
-		this.name = name;
-	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  remark
-	 */
-	@Column(name ="REMARK",nullable=true,length=1024)
-	public java.lang.String getRemark(){
-		return this.remark;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  remark
-	 */
-	public void setRemark(java.lang.String remark){
-		this.remark = remark;
 	}
 }

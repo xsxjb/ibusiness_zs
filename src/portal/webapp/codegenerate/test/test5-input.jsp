@@ -33,16 +33,11 @@
                   </c:if>
                   
                           <div class="form-group">
-                          <label class="col-lg-2 control-label" for="code-bookname">数名:</label>
-                          <div class="col-lg-3">   <input id="code-bookname" type="text" name="bookname" value="${model.bookname}" class="text required" ></div>
+                          <label class="col-lg-2 control-label" for="code-name">名:</label>
+                          <div class="col-lg-3">   <input id="code-name" type="text" name="name" value="${model.name}" class="text " ></div>
                           
-                          <label class="col-lg-2 control-label" for="code-exc">excel:</label>
-                          <div class="col-lg-3">  <input id="code-exc" type="text" name="exc" value="${model.exc}" class="text number required" ></div>
-                          
-                            </div>
-                          <div class="form-group">
-                          <label class="col-lg-2 control-label" for="code-remark1">备注1:</label>
-                          <div class="col-lg-6">    <textarea class="form-control required" id="code-remark1" name="remark1" rows="1" >${model.remark1}</textarea></div>
+                          <label class="col-lg-2 control-label" for="code-email">邮件:</label>
+                          <div class="col-lg-3">   <input id="code-email" type="text" name="email" value="${model.email}" class="text " ></div>
                           
                             </div>
                   

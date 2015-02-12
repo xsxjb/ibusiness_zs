@@ -5,7 +5,7 @@
 
   <head>
     <%@include file="/common/meta.jsp"%>
-    <title>测试练习表单列表</title>
+    <title>合同类型列表</title>
     <%@include file="/common/center.jsp"%>
     <script type="text/javascript">
 		var config = {
@@ -22,7 +22,7 @@
 		    },
 			selectedItemClass: 'selectedItem',
 			gridFormId: 'gridForm',
-	        exportUrl: 'test-export.do'
+	        exportUrl: 'contract_type-export.do'
 		};
 
 		var table;
@@ -46,20 +46,21 @@
         <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">查询</h4></div>
           <div class="panel-body">
 	          <div id="search" class="content content-inner">
-				  <form name="cgForm" method="post" action="test-list.do" class="form-inline">
+				  <form name="cgForm" method="post" action="contract_type-list.do" class="form-inline">
 				    <div class="form-group">
-				                <label for="code_table_name">姓名:</label>
-				                <input type="text" id="code_table_name" name="filter_LIKES_name" value="${param.filter_LIKES_name}">
+				                <label for="code_table_typename">合同类型名称:</label>
+				                <input type="text" id="code_table_typename" name="filter_LIKES_typename" value="${param.filter_LIKES_typename}">
 					    <button class="btn btn-primary btn-sm" onclick="document.cgForm.submit()"><span class="glyphicon glyphicon-search"></span>查询</button>
 					</div>
 				 </form>
 			  </div>
 		  </div>
-	   <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">测试练习表单列表</h4></div>
+	   <div class="panel-heading"><h4 class="panel-title glyphicon glyphicon-paperclip">合同类型列表</h4></div>
        <div class="panel-body">
 		    <div class="pull-left">
-			    <button class="btn btn-primary btn-sm a-insert" href="test-input.do" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-tasks"></span>新建</button>
+			    <button class="btn btn-primary btn-sm a-insert" href="contract_type-input.do" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-tasks"></span>新建</button>
 			    <button class="btn btn-primary btn-sm a-remove" onclick="table.removeAll()"><span class="glyphicon glyphicon-trash"></span>删除</button>
+			    <button class="btn btn-primary btn-sm" onclick="table.exportExcel()"><span class="glyphicon glyphicon-export"></span>导出Excel</button>
             
 			</div>
 			<div class="pull-right">
@@ -74,13 +75,13 @@
 		    <div class="m-clear"></div>
 	   </div>
 	   <div class="content">
-			<form id="gridForm" name="gridForm" method='post' action="test-remove.do" class="m-form-blank">
+			<form id="gridForm" name="gridForm" method='post' action="contract_type-remove.do" class="m-form-blank">
 			  <table id="codeGrid" class="table table-hover table-striped">
 			      <thead>
 				      <tr>
 				        <th width="30" class="m-table-check"><input type="checkbox" name="checkAll" onchange="toggleSelectedItems(this.checked)"></th>
-					                <th class="sorting">姓名</th>
-					                <th class="sorting">备注</th>
+					                <th class="sorting">合同类型名称</th>
+					                <th class="sorting">合同类型描述</th>
 				        <th width="30">&nbsp;</th>
 				      </tr>
 				    </thead>
@@ -88,10 +89,10 @@
 					      <c:forEach items="${page.result}" var="item" varStatus="status">  
 					      <tr class="${status.index%2==1? 'active':''}">
 					        <td><input type="checkbox" class="selectedItem a-check" name="selectedItem" value="${item.id}"></td>
-						            <td>${item.name}</td>
-						            <td>${item.remark}</td>
+						            <td>${item.typename}</td>
+						            <td>${item.typedescribe}</td>
 					        <td>
-					          <a href="test-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
+					          <a href="contract_type-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
 					        </td>
 					      </tr>
 					      </c:forEach>

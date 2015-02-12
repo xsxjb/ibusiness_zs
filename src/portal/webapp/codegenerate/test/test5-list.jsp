@@ -52,8 +52,6 @@
 	          <div id="search" class="content content-inner">
 				  <form name="cgForm" method="post" action="test5-list.do" class="form-inline">
 				    <div class="form-group">
-				                <label for="code_table_bookname">测试表5.数名:</label>
-				                <input type="text" id="code_table_bookname" name="filter_LIKES_bookname" value="${param.filter_LIKES_bookname}">
 					    <button class="btn btn-primary btn-sm" onclick="document.cgForm.submit()"><span class="glyphicon glyphicon-search"></span>查询</button>
 					</div>
 				 </form>
@@ -88,9 +86,8 @@
 			      <thead>
 				      <tr>
 				        <th width="30" class="m-table-check"><input type="checkbox" name="checkAll" onchange="toggleSelectedItems(this.checked)"></th>
-					                <th class="sorting">数名</th>
-					                <th class="sorting">excel</th>
-					                <th class="sorting">备注1</th>
+					                <th class="sorting">名</th>
+					                <th class="sorting">邮件</th>
 				        <th width="30">&nbsp;</th>
 				      </tr>
 				    </thead>
@@ -98,9 +95,8 @@
 					      <c:forEach items="${page.result}" var="item" varStatus="status">  
 					      <tr class="${status.index%2==1? 'active':''}">
 					        <td><input type="checkbox" class="selectedItem a-check" name="selectedItem" value="${item.id}"></td>
-						            <td>${item.bookname}</td>
-						            <td>${item.exc}</td>
-						            <td>${item.remark1}</td>
+						            <td>${item.name}</td>
+						            <td>${item.email}</td>
 					        <td>
 					          <a href="test5-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
 					        </td>

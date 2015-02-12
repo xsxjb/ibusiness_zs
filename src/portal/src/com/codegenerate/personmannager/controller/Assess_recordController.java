@@ -1,4 +1,4 @@
-package com.codegenerate.test.controller;
+package com.codegenerate.personmannager.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -31,35 +31,35 @@ import com.ibusiness.common.page.PropertyFilter;
 import com.ibusiness.common.page.Page;
 import com.ibusiness.common.util.CommonUtils;
 
-import com.codegenerate.test.entity.TestEntity;
-import com.codegenerate.test.service.TestService;
+import com.codegenerate.personmannager.entity.Assess_recordEntity;
+import com.codegenerate.personmannager.service.Assess_recordService;
 
 /**   
  * @Title: Controller
- * @Description: 测试练习表页面
+ * @Description: 考核记录页面
  * @author JiangBo
  *
  */
 @Controller
-@RequestMapping("test")
-public class TestController {
+@RequestMapping("assess_record")
+public class Assess_recordController {
 
     private MessageHelper messageHelper;
-    private TestService testService;
+    private Assess_recordService assess_recordService;
    /**
      * 列表
      */
-    @RequestMapping("test-list")
+    @RequestMapping("assess_record-list")
     public String list(@ModelAttribute Page page, @RequestParam Map<String, Object> parameterMap, Model model) {
         // 查询条件Filter过滤器
         List<PropertyFilter> propertyFilters = PropertyFilter.buildFromMap(parameterMap);
         // 添加当前公司(用户范围)ID查询
     	propertyFilters = CommonBusiness.getInstance().editPFByScopeId(propertyFilters);
         // 根据条件查询数据
-        page = testService.pagedQuery(page, propertyFilters);
+        page = assess_recordService.pagedQuery(page, propertyFilters);
         model.addAttribute("page", page);
         // 返回JSP
-        return "codegenerate/test/test-list.jsp";
+        return "codegenerate/personmannager/assess_record-list.jsp";
     }
     
     /**
@@ -68,22 +68,23 @@ public class TestController {
      * @param model
      * @return
      */
-    @RequestMapping("test-input")
+    @RequestMapping("assess_record-input")
     public String input(@RequestParam(value = "id", required = false) String id, Model model) {
-        TestEntity entity = null;
+        Assess_recordEntity entity = null;
         if (!CommonUtils.isNull(id)) {
-            entity = testService.get(id);
+            entity = assess_recordService.get(id);
         } else {
-            entity = new TestEntity();
+            entity = new Assess_recordEntity();
         }
         
         // 默认值公式
-        entity = (TestEntity) new FormulaCommon().defaultValue(entity, "IB_TEST");
+        entity = (Assess_recordEntity) new FormulaCommon().defaultValue(entity, "IB_ASSESS_RECORD");
         
         model.addAttribute("model", entity);
         
         // 在controller中设置页面控件用的数据
-        return "codegenerate/test/test-input.jsp";
+                Map<String, com.ibusiness.component.form.entity.ConfFormTableColumn> checkrankFTCMap= CommonBusiness.getInstance().getFormTableColumnMap("IB_ASSESS_RECORD", "assessRecord");List<com.ibusiness.common.model.ConfSelectItem> checkrankItems = (List<com.ibusiness.common.model.ConfSelectItem>) CommonUtils.getListFromJson(checkrankFTCMap.get("CHECKRANK").getConfSelectInfo(), com.ibusiness.common.model.ConfSelectItem.class);model.addAttribute("checkrankItems", checkrankItems);
+        return "codegenerate/personmannager/assess_record-input.jsp";
     }
 
     /**
@@ -92,8 +93,8 @@ public class TestController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("test-save")
-    public String save(@ModelAttribute TestEntity entity, RedirectAttributes redirectAttributes) throws Exception {
+    @RequestMapping("assess_record-save")
+    public String save(@ModelAttribute Assess_recordEntity entity, RedirectAttributes redirectAttributes) throws Exception {
         // 先进行校验
         // 再进行数据复制
         String id = entity.getId();
@@ -101,12 +102,12 @@ public class TestController {
             entity.setId(UUID.randomUUID().toString());
             // 设置范围ID
             entity.setScopeid(CommonBusiness.getInstance().getCurrentUserScopeId());
-            testService.insert(entity);
+            assess_recordService.insert(entity);
         } else {
-            testService.update(entity);
+            assess_recordService.update(entity);
         }
         messageHelper.addFlashMessage(redirectAttributes, "core.success.save", "保存成功");
-        return "redirect:/test/test-list.do";
+        return "redirect:/assess_record/assess_record-list.do";
     }
    /**
      * 删除
@@ -114,32 +115,32 @@ public class TestController {
      * @param redirectAttributes
      * @return
      */
-    @RequestMapping("test-remove")
+    @RequestMapping("assess_record-remove")
     public String remove(@RequestParam("selectedItem") List<String> selectedItem, RedirectAttributes redirectAttributes) {
-        List<TestEntity> entitys = testService.findByIds(selectedItem);
-        for (TestEntity entity : entitys) {
-            testService.remove(entity);
+        List<Assess_recordEntity> entitys = assess_recordService.findByIds(selectedItem);
+        for (Assess_recordEntity entity : entitys) {
+            assess_recordService.remove(entity);
         }
         messageHelper.addFlashMessage(redirectAttributes, "core.success.delete", "删除成功");
 
-        return "redirect:/test/test-list.do";
+        return "redirect:/assess_record/assess_record-list.do";
     }
     /**
      * excel导出
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping("test-export")
+    @RequestMapping("assess_record-export")
     public void excelExport(@ModelAttribute Page page, @RequestParam Map<String, Object> parameterMap, HttpServletResponse response) {
         List<PropertyFilter> propertyFilters = PropertyFilter.buildFromMap(parameterMap);
-        page = testService.pagedQuery(page, propertyFilters);
-        List<TestEntity> beans = (List<TestEntity>) page.getResult();
+        page = assess_recordService.pagedQuery(page, propertyFilters);
+        List<Assess_recordEntity> beans = (List<Assess_recordEntity>) page.getResult();
 
         TableModel tableModel = new TableModel();
         // excel文件名
-        tableModel.setExcelName("测试练习表页面"+CommonUtils.getInstance().getCurrentDateTime());
+        tableModel.setExcelName("考核记录页面"+CommonUtils.getInstance().getCurrentDateTime());
         // 列名
-        tableModel.addHeaders("id", "scopeid", "name", "remark");
-        tableModel.setTableName("IB_TEST");
+        tableModel.addHeaders("name", "checktime", "job", "checkproject", "checkrank", "checkscore", "checkassess", "checker", "id", "scopeid");
+        tableModel.setTableName("IB_ASSESS_RECORD");
         tableModel.setData(beans);
         try {
             new ExcelCommon().exportExcel(response, tableModel);
@@ -150,7 +151,7 @@ public class TestController {
     /**
      * excel导入
      */
-    @RequestMapping("test-importExcel")
+    @RequestMapping("assess_record-importExcel")
     public String importExport(@RequestParam("attachment") MultipartFile attachment, HttpServletResponse response) {
         try {
             File file = new File("test.xls"); 
@@ -158,13 +159,13 @@ public class TestController {
             // 
             TableModel tableModel = new TableModel();
             // 列名
-            tableModel.addHeaders("id", "scopeid", "name", "remark");
+            tableModel.addHeaders("name", "checktime", "job", "checkproject", "checkrank", "checkscore", "checkassess", "checker", "id", "scopeid");
             // 导入
-            new ExcelCommon().uploadExcel(file, tableModel, "com.codegenerate.test.entity.TestEntity");
+            new ExcelCommon().uploadExcel(file, tableModel, "com.codegenerate.personmannager.entity.Assess_recordEntity");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/test/test-list.do";
+        return "redirect:/assess_record/assess_record-list.do";
     }
     // ======================================================================
     @Resource
@@ -173,8 +174,8 @@ public class TestController {
     }
 
     @Resource
-    public void setTestService(TestService testService) {
-        this.testService = testService;
+    public void setAssess_recordService(Assess_recordService assess_recordService) {
+        this.assess_recordService = assess_recordService;
     }
     
 }
