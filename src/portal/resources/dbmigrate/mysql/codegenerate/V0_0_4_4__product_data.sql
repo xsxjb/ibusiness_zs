@@ -26,6 +26,7 @@ INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID)
 INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID) VALUES('productmanageThree42','项目出库流程','3','/project_out/project_out-list.do?flowType=0&flowId=productOut001','URL','2','productmanageTwo4');
 INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID) VALUES('productmanageThree43','产品库存管理','3','/warehouse_product/warehouse_product-list.do','URL','3','productmanageTwo4');
 /*===============   菜单和角色模板关联表  =============================*/
+/*
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('productmanageOne','2');
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('productmanageTwo1','2');
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('productmanageTwo2','2');
@@ -43,6 +44,7 @@ INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('productmanageThree33',
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('productmanageThree41','2');
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('productmanageThree42','2');
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('productmanageThree43','2');
+*/
 
 /* ================================================================================   */
 /* ===================================    仓库信息表          =================================   */
