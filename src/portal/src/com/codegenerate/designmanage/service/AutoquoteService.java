@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ibusiness.common.page.HibernateEntityDao;
-import com.codegenerate.designmanage.entity.AutoquoteEntity;
+import com.codegenerate.designmanage.entity.AutoquoteManageEntity;
 
 /**   
  * @Title: Service
@@ -16,7 +16,7 @@ import com.codegenerate.designmanage.entity.AutoquoteEntity;
  */
 @Service
 @Transactional
-public class AutoquoteService extends HibernateEntityDao<AutoquoteEntity> {
+public class AutoquoteService extends HibernateEntityDao<AutoquoteManageEntity> {
     /**
      * 插入
      * @param entity
@@ -28,7 +28,7 @@ public class AutoquoteService extends HibernateEntityDao<AutoquoteEntity> {
      * 删除
      * @param entity
      */
-    public void remove(AutoquoteEntity entity) {
+    public void remove(AutoquoteManageEntity entity) {
         super.remove(entity);
     }
 }

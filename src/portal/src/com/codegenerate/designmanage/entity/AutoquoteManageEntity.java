@@ -13,42 +13,43 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "IB_AUTOQUOTE")
-public class AutoquoteEntity implements java.io.Serializable {
+public class AutoquoteManageEntity implements java.io.Serializable {
     private static final long serialVersionUID = 0L;
-	/**ceilingarea*/
+	// 吊顶面积
 	private Double ceilingarea;
-	/**tilearea*/
+	// 瓷砖面积
 	private Double tilearea;
-	/**floorarea*/
+	// 地板面积
 	private Double floorarea;
-	/**paintarea*/
+	// 涂料面积
 	private Double paintarea;
-	/**totalbuildarea*/
+	// 建筑面积
 	private Double totalbuildarea;
-	/**totaluserarea*/
+	// 使用面积
 	private Double totaluserarea;
-	/**totalamount*/
+	// 总金额
 	private Double totalamount;
 	/**id*/
 	private String id;
 	/**scopeid*/
 	private String scopeid;
-	/**ceilingamount*/
-	private Double ceilingamount;
-	/**tileamount*/
-	private Double tileamount;
-	/**flooramount*/
-	private Double flooramount;
-	/**paintamount*/
-	private Double paintamount;
+	
 	// 吊顶单价
 	private Double ceilingUPrice;
+	// 吊顶金额
+	private Double ceilingamount;
 	// 瓷砖单价
 	private Double tileUPrice;
+	// 瓷砖金额
+	private Double tileamount;
 	// 地板单价
 	private Double floorUPrice;
+	// 地板金额
+	private Double flooramount;
 	// 涂料单价
 	private Double paintUPrice;
+	// 涂料金额
+	private Double paintamount;
 	// 人工费
 	private Double artificialAmount;
 	

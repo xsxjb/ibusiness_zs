@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codegenerate.designmanage.entity.AutoquoteBathEntity;
 import com.codegenerate.designmanage.entity.AutoquoteBedroomEntity;
-import com.codegenerate.designmanage.entity.AutoquoteEntity;
+import com.codegenerate.designmanage.entity.AutoquoteManageEntity;
 import com.codegenerate.designmanage.entity.AutoquoteHallEntity;
 import com.codegenerate.designmanage.entity.AutoquoteKitchenEntity;
 import com.codegenerate.designmanage.entity.AutoquoteVerandaEntity;
@@ -83,8 +83,8 @@ public class AutoquoteManageController {
     	Double totaluserarea=0.0;
     	
     	// 计算数据
-        AutoquoteEntity entity = new AutoquoteEntity();
-    	List<AutoquoteEntity> list = autoquoteService.getAll();
+        AutoquoteManageEntity entity = new AutoquoteManageEntity();
+    	List<AutoquoteManageEntity> list = autoquoteService.getAll();
     	if (null != list && list.size() > 0) {
     		entity = list.get(0);
     	} else {
@@ -162,23 +162,23 @@ public class AutoquoteManageController {
         
         // 计算数据
         // 吊顶面积
-        entity.setCeilingarea(ceilingarea);
+        entity.setCeilingarea(CommonUtils.formatDoubleBy2Decimal(ceilingarea));
         // 吊顶金额
         if (null == entity.getCeilingUPrice()) {entity.setCeilingUPrice(1.0);}
-        entity.setCeilingamount(ceilingarea * entity.getCeilingUPrice());
+        entity.setCeilingamount(entity.getCeilingarea() * entity.getCeilingUPrice());
         // 瓷砖面积
     	entity.setTilearea(CommonUtils.formatDoubleBy2Decimal(tilearea));
     	// 瓷砖金额
     	if (null == entity.getTileUPrice()) {entity.setTileUPrice(1.0);}
     	entity.setTileamount(entity.getTilearea() * entity.getTileUPrice());
     	// 地板面积
-    	entity.setFloorarea(floorarea);
+    	entity.setFloorarea(CommonUtils.formatDoubleBy2Decimal(floorarea));
     	if (null == entity.getFloorUPrice()) {entity.setFloorUPrice(1.0);}
-    	entity.setFlooramount(floorarea*entity.getFloorUPrice());
+    	entity.setFlooramount(entity.getFloorarea()*entity.getFloorUPrice());
     	// 墙漆/涂料面积
-    	entity.setPaintarea(paintarea);
+    	entity.setPaintarea(CommonUtils.formatDoubleBy2Decimal(paintarea));
     	if (null == entity.getPaintUPrice()) {entity.setPaintUPrice(1.0);}
-    	entity.setPaintamount(paintarea*entity.getPaintUPrice());
+    	entity.setPaintamount(entity.getPaintarea()*entity.getPaintUPrice());
     	// 总建筑面积
     	entity.setTotalbuildarea(0.0);
     	// 总使用面积
@@ -199,7 +199,7 @@ public class AutoquoteManageController {
      * @throws Exception
      */
     @RequestMapping("autoquote-save")
-    public String saveDraft(@ModelAttribute AutoquoteEntity entity, RedirectAttributes redirectAttributes) throws Exception {
+    public String saveDraft(@ModelAttribute AutoquoteManageEntity entity, RedirectAttributes redirectAttributes) throws Exception {
         // 再进行数据复制
         String id = entity.getId();
         if (CommonUtils.isNull(id)) {
@@ -437,8 +437,8 @@ public class AutoquoteManageController {
      */
     @RequestMapping("autoquote-remove")
     public String remove(@RequestParam("selectedItem") List<String> selectedItem, @RequestParam(value = "flowId", required = false) String flowId, RedirectAttributes redirectAttributes) {
-        List<AutoquoteEntity> entitys = autoquoteService.findByIds(selectedItem);
-        for (AutoquoteEntity entity : entitys) {
+        List<AutoquoteManageEntity> entitys = autoquoteService.findByIds(selectedItem);
+        for (AutoquoteManageEntity entity : entitys) {
             autoquoteService.remove(entity);
         }
         messageHelper.addFlashMessage(redirectAttributes, "core.success.delete", "删除成功");
