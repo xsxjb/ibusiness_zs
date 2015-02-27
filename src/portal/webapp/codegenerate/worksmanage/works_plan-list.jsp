@@ -74,6 +74,7 @@
 					      <thead>
 						      <tr>
 						          <th width="30" class="m-table-check"><input type="checkbox" name="checkAll" onchange="toggleSelectedItems(this.checked)"></th>
+				                          <th class="sorting">项目编号</th>
 				                          <th class="sorting">项目名称</th>
 				                          <th class="sorting">项目类型</th>
 				                          <th class="sorting">客户名称</th>
@@ -81,6 +82,12 @@
 				                          <th class="sorting">工作日</th>
 				                          <th class="sorting">总开始时间</th>
 				                          <th class="sorting">总结束时间</th>
+				                          <th class="sorting">采购开始时间</th>
+				                          <th class="sorting">采购结束时间</th>
+				                          <th class="sorting">施工开始时间</th>
+				                          <th class="sorting">施工结束时间</th>
+				                          <th class="sorting">施工外协开始时间</th>
+				                          <th class="sorting">施工外协结束时间</th>
 						          <th width="30">&nbsp;</th>
 						      </tr>
 						    </thead>
@@ -88,6 +95,7 @@
 							      <c:forEach items="${page.result}" var="item" varStatus="status">
 							      <tr class="${status.index%2==1? 'active':''}">
 							        <td><input type="checkbox" class="selectedItem a-check" name="selectedItem" value="${item.id}"></td>
+				                            <td>${item.projectno}</td>
 				                            <td>${item.projectname}</td>
 				                            <td>${item.projecttype}</td>
 				                            <td>${item.customername}</td>
@@ -95,6 +103,12 @@
 				                            <td>${item.workingday}</td>
 				                            <td>${item.starttime}</td>
 				                            <td>${item.endtime}</td>
+				                            <td>${item.buystarttime}</td>
+				                            <td>${item.buyendtime}</td>
+				                            <td>${item.prodstarttime}</td>
+				                            <td>${item.prodendtime}</td>
+				                            <td>${item.prodoutstarttime}</td>
+				                            <td>${item.prodoutendtime}</td>
 							        <td>
 							          <a href="works_plan-input.do?id=${item.id}" class="a-update"><span class="glyphicon glyphicon-pencil"></span></a>
 							        </td>
