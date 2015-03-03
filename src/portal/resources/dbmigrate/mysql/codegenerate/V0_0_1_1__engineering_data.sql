@@ -134,15 +134,16 @@ insert  into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUM
 insert  into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialsType','IB_MATERIALS_TYPE.PARENTID','父节点','PARENTID','IB_MATERIALS_TYPE',3,'7','','','1','1','1','2','','{\"sql\":\"select id vKey, typeName vValue from IB_MATERIALS_TYPE where isleaf =\'true\' \"}');
 insert  into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialsType','IB_MATERIALS_TYPE.TYPENAME','原料分类名称','TYPENAME','IB_MATERIALS_TYPE',2,'1','','','1','1','1','1','','');
 insert  into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialsType','IB_MATERIALS_TYPE.TYPENO','原料分类编号','TYPENO','IB_MATERIALS_TYPE',1,'1','','','1','1','1','2','','');
-/* ================= 数据插入 ==================   */
+/* ================= 数据插入 ================== */
 insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('10001101',NULL,'有机合成','10001','false');
 insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('1000010101',NULL,'抗生素','1000010','false');
 insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('1000011',NULL,'植物化学类','10000','true');
-insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('10000',NULL,'天然化学','0','true');
+insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('10000',NULL,'瓷砖','0','true');
 insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('1000010',NULL,'生物化学类','10000','true');
 insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('10001102',NULL,'无机合成','10001','false');
 insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('1000011101',NULL,'植物类','1000011','false');
-insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('10001',NULL,'化学合成类','0','true');
+insert into ib_materials_type(ID,TYPENO,TYPENAME,PARENTID,ISLEAF) values ('10001',NULL,'地板','0','true');
+
 
 /* ================================================================================   */
 /* ====================================   原料表   ====================================   */
@@ -297,8 +298,8 @@ insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,co
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','EVENTDATE','出库日期','DATE','0','是','',1);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','BATCHNO','批次号','VARCHAR','8','是','',2);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','WAREHOUSENO','仓库编号','VARCHAR','64','是','',3);
-insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','PRODUCTNO','产品编号','VARCHAR','64','是','',4);
-insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','PRODUCTNAME','产品名称','VARCHAR','256','是','',5);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','CUSTOMERNAME','客户名称','VARCHAR','64','是','',4);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','CUSTOMERADDRESS','客户地址','VARCHAR','256','是','',5);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT','MATERIALNUM','数量','NUMBER','10','是','',6);
 
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) values ('IB_MATERIAL_OUT_S','ID','UUID主键','VARCHAR','64','否',NULL,91);
@@ -319,8 +320,8 @@ insert  into ib_conf_form_table(PACKAGENAME,FORMNAME,TABLENAME,TABLETYPE) values
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.BATCHNO','批次号','BATCHNO','IB_MATERIAL_OUT',2,'1','','','1','1','2','1','','');
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.EVENTDATE','出库日期','EVENTDATE','IB_MATERIAL_OUT',1,'4','','','1','2','2','1','@currentDate','');
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.MATERIALNUM','数量','MATERIALNUM','IB_MATERIAL_OUT',6,'5','','','1','1','2','1','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.PRODUCTNAME','(领料)原料出库表.产品名称','PRODUCTNAME','IB_MATERIAL_OUT',5,'1','','','2','1','2','1','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.PRODUCTNO','产品名','PRODUCTNO','IB_MATERIAL_OUT',4,'7','','','1','1','2','1','','{\"sql\":\"select id vKey, PRODUCTNAME vValue from IB_PRODUCT \"} ');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.CUSTOMERNAME','客户名','CUSTOMERNAME','IB_MATERIAL_OUT',5,'1','','','2','1','2','1','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.CUSTOMERADDRESS','客户地址','CUSTOMERADDRESS','IB_MATERIAL_OUT',4,'7','','','1','1','2','1','','');
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT.WAREHOUSENO','仓库名','WAREHOUSENO','IB_MATERIAL_OUT',3,'7','','','1','1','2','1','','{\"sql\":\"select id vKey, WAREHOUSENAME vValue from IB_WAREHOUSE \"}');
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT_S.MANUFACTURENAME','制造商','MANUFACTURENAME','IB_MATERIAL_OUT_S',6,'1','','','1','1','2','1','','');
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('worksmanage','materialOut','IB_MATERIAL_OUT_S.MATERIALMODEL','原料规格型号','MATERIALMODEL','IB_MATERIAL_OUT_S',3,'1','','','1','1','2','1','','');
