@@ -43,10 +43,10 @@ public class Material_outEntity implements java.io.Serializable {
 	private java.lang.String batchno;
 	/**warehouseno*/
 	private java.lang.String warehouseno;
-	/**productno*/
-	private java.lang.String productno;
-	/**productname*/
-	private java.lang.String productname;
+	/**customername*/
+	private java.lang.String customername;
+	/**customeraddress*/
+	private java.lang.String customeraddress;
 	/**materialnum*/
 	private java.lang.Integer materialnum;
 	
@@ -230,35 +230,35 @@ public class Material_outEntity implements java.io.Serializable {
 	}
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  productno
+	 *@return: java.lang.String  customername
 	 */
-	@Column(name ="PRODUCTNO",nullable=true,length=64)
-	public java.lang.String getProductno(){
-		return this.productno;
+	@Column(name ="CUSTOMERNAME",nullable=true,length=64)
+	public java.lang.String getCustomername(){
+		return this.customername;
 	}
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  productno
+	 *@param: java.lang.String  customername
 	 */
-	public void setProductno(java.lang.String productno){
-		this.productno = productno;
+	public void setCustomername(java.lang.String customername){
+		this.customername = customername;
 	}
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  productname
+	 *@return: java.lang.String  customeraddress
 	 */
-	@Column(name ="PRODUCTNAME",nullable=true,length=256)
-	public java.lang.String getProductname(){
-		return this.productname;
+	@Column(name ="CUSTOMERADDRESS",nullable=true,length=256)
+	public java.lang.String getCustomeraddress(){
+		return this.customeraddress;
 	}
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  productname
+	 *@param: java.lang.String  customeraddress
 	 */
-	public void setProductname(java.lang.String productname){
-		this.productname = productname;
+	public void setCustomeraddress(java.lang.String customeraddress){
+		this.customeraddress = customeraddress;
 	}
 	/**
 	 *方法: 取得java.lang.Integer

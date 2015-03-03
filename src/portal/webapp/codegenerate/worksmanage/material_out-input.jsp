@@ -98,10 +98,15 @@
                               <div class="col-lg-3">  <c:if test="${nodeColumsMap.warehouseno.fcEdit=='1'}">    <select id="code-warehouseno" name="warehouseno" class="form-control" >          <option value="" >请选择</option>        <c:forEach items="${warehousenoItems}" var="item">          <option value="${item.key}" ${item.key==model.warehouseno? 'selected':''} >${item.value}</option>        </c:forEach>    </select>  </c:if>  <c:if test="${nodeColumsMap.warehouseno.fcEdit!='1'}">    <label>${model.warehouseno}</label>    <input type="hidden" name="warehouseno" value="${model.warehouseno}">  </c:if></div>
 	                                      
 						 
-						      <label class="control-label  col-lg-2" for="code-productno">产品编号:</label>
-                              <div class="col-lg-3">  <c:if test="${nodeColumsMap.productno.fcEdit=='1'}">    <select id="code-productno" name="productno" class="form-control" >          <option value="" >请选择</option>        <c:forEach items="${productnoItems}" var="item">          <option value="${item.key}" ${item.key==model.productno? 'selected':''} >${item.value}</option>        </c:forEach>    </select>  </c:if>  <c:if test="${nodeColumsMap.productno.fcEdit!='1'}">    <label>${model.productno}</label>    <input type="hidden" name="productno" value="${model.productno}">  </c:if></div>
+						      <label class="control-label  col-lg-2" for="code-customername">客户名称:</label>
+                              <div class="col-lg-3">  <c:if test="${nodeColumsMap.customername.fcEdit=='1'}">    <input id="code-customername" type="text" name="customername" value="${model.customername}" class="text required" >  </c:if>  <c:if test="${nodeColumsMap.customername.fcEdit!='1'}">    <label>${model.customername}</label>    <input type="hidden" name="customername" value="${model.customername}">  </c:if></div>
 	                                      
                             </div>
+						 
+                           <div class="form-group">
+						      <label class="control-label  col-lg-2" for="code-customeraddress">客户地址:</label>
+                              <div class="col-lg-3">  <c:if test="${nodeColumsMap.customeraddress.fcEdit=='1'}">    <input id="code-customeraddress" type="text" name="customeraddress" value="${model.customeraddress}" class="text required" >  </c:if>  <c:if test="${nodeColumsMap.customeraddress.fcEdit!='1'}">    <label>${model.customeraddress}</label>    <input type="hidden" name="customeraddress" value="${model.customeraddress}">  </c:if></div>
+	                                      
 						 
 						      <label class="control-label  col-lg-2" for="code-materialnum">数量:</label>
                               <div class="col-lg-3">  <c:if test="${nodeColumsMap.materialnum.fcEdit=='1'}">    <input id="code-materialnum" type="text" name="materialnum" value="${model.materialnum}" class="text number required" >  </c:if>  <c:if test="${nodeColumsMap.materialnum.fcEdit!='1'}">    <label>${model.materialnum}</label>    <input type="hidden" name="materialnum" value="${model.materialnum}">  </c:if></div>
