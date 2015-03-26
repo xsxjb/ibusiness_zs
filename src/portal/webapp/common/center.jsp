@@ -16,7 +16,6 @@
     <script type="text/javascript" src="${ctx}/plugin/jquery/jquery-migrate-1.2.1.min.js"></script>
     
     <link type="text/css" rel="stylesheet" href="${ctx}/plugin/jquery-validation/jquery.validate.css">
-    <script type="text/javascript" src="${ctx}/plugin/jquery-validation/jquery.validate.js"></script>
     <script type="text/javascript" src="${ctx}/plugin/jquery-validation/jquery.validate.min.js"></script>
     <script type="text/javascript" src="${ctx}/plugin/jquery-validation/localization/messages_zh_CN.js"></script>
     
@@ -30,9 +29,14 @@
     <link type="text/css" rel="stylesheet" href="${ctx}/plugin/bootstrap-datepicker/datepicker.css">
     <script type="text/javascript" src="${ctx}/plugin/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     
-    <link type="text/css" rel="stylesheet" href="${ctx}/plugin/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" >
+    <link type="text/css" rel="stylesheet" href="${ctx}/plugin/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" >
     <script type="text/javascript" src="${ctx}/plugin/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-
+    <style>
+		.datepicker{
+			z-index:99999999;
+		}
+	</style>
+	 
     <!-- table and pager -->
     <script type="text/javascript" src="${ctx}/plugin/pagination/pagination.js"></script>
     <script type="text/javascript" src="${ctx}/plugin/table/table.js"></script>
@@ -40,11 +44,10 @@
     
     <!-- layout -->
     <script type="text/javascript" src="${ctx}/plugin/ibusiness/js/table.js"></script>
-    <style>
-		.datepicker{
-			z-index:99999999;
-		}
-	 </style>
+    
+    <!-- ajax submit -->
+	<script type="text/javascript" src="${ctx}/plugin/jquery/jquery.form.js"></script>
+    
     <script type="text/javascript">
 		$(function() {
 			// 显示信息
@@ -71,8 +74,9 @@
 		});
     </script>
     
-    <!-- 自动换行 -->
+    <!-- 自动换行 
     <style type="text/css">
         table {table-layout:fixed}
         td {word-break:break-all;overflow:hidden;} 
     </style>
+    -->

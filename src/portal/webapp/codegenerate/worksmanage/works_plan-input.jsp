@@ -71,73 +71,74 @@
 				   <c:if test="${model != null}">
 				       <input type="hidden" name="id" value="${model.id}">
 				   </c:if>
+				   
                              <div class="form-group">
 						      <label class="control-label col-lg-2" for="code-projectno">项目编号:</label>
-                               <div class="col-lg-3">   <input id="code-projectno" type="text" name="projectno" value="${model.projectno}" class="text " ></div>
+                               <div class="col-lg-3">   <input id="code-projectno" type="text" name="projectno" value="${model.projectno}" class="text form-control input-sm "  ></div>
                                
 							
 						      <label class="control-label col-lg-2" for="code-projectname">项目名称:</label>
-                               <div class="col-lg-3">   <input id="code-projectname" type="text" name="projectname" value="${model.projectname}" class="text " ></div>
+                               <div class="col-lg-3">   <input id="code-projectname" type="text" name="projectname" value="${model.projectname}" class="text form-control input-sm required"  ></div>
                                
                             </div>
 							
                              <div class="form-group">
 						      <label class="control-label col-lg-2" for="code-projecttype">项目类型:</label>
-                               <div class="col-lg-3">   <input id="code-projecttype" type="text" name="projecttype" value="${model.projecttype}" class="text " ></div>
+                               <div class="col-lg-3">   <input id="code-projecttype" type="text" name="projecttype" value="${model.projecttype}" class="text form-control input-sm "  ></div>
                                
 							
 						      <label class="control-label col-lg-2" for="code-customername">客户名称:</label>
-                               <div class="col-lg-3">   <input id="code-customername" type="text" name="customername" value="${model.customername}" class="text " ></div>
+                               <div class="col-lg-3">   <input id="code-customername" type="text" name="customername" value="${model.customername}" class="text form-control input-sm "  ></div>
                                
                             </div>
 							
                              <div class="form-group">
 						      <label class="control-label col-lg-2" for="code-productmanage">项目负责人:</label>
-                               <div class="col-lg-3">   <input id="code-productmanage" type="text" name="productmanage" value="${model.productmanage}" class="text " ></div>
+                               <div class="col-lg-3">   <input id="code-productmanage" type="text" name="productmanage" value="${model.productmanage}" class="text form-control input-sm "  ></div>
                                
 							
 						      <label class="control-label col-lg-2" for="code-workingday">工作日:</label>
-                               <div class="col-lg-3">   <input id="code-workingday" type="text" name="workingday" value="${model.workingday}" class="text " ></div>
+                               <div class="col-lg-3">   <input id="code-workingday" type="text" name="workingday" value="${model.workingday}" class="text form-control input-sm "  ></div>
                                
                             </div>
 							
                              <div class="form-group">
 						      <label class="control-label col-lg-2" for="code-starttime">总开始时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-starttime" type="text" name="starttime" value="${model.starttime}" placeholder="点击选择" class="form-control required" readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-starttime" type="text" name="starttime" value="${model.starttime}" placeholder="点击选择" class="form-control input-sm required" readonly >  </span>  </div></div>
                                
 							
 						      <label class="control-label col-lg-2" for="code-endtime">总结束时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-endtime" type="text" name="endtime" value="${model.endtime}" placeholder="点击选择" class="form-control required" readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-endtime" type="text" name="endtime" value="${model.endtime}" placeholder="点击选择" class="form-control input-sm required" readonly >  </span>  </div></div>
                                
                             </div>
 							
                              <div class="form-group">
 						      <label class="control-label col-lg-2" for="code-buystarttime">采购开始时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-buystarttime" type="text" name="buystarttime" value="${model.buystarttime}" placeholder="点击选择" class="form-control required" readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-buystarttime" type="text" name="buystarttime" value="${model.buystarttime}" placeholder="点击选择" class="form-control input-sm required" readonly >  </span>  </div></div>
                                
 							
 						      <label class="control-label col-lg-2" for="code-buyendtime">采购结束时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-buyendtime" type="text" name="buyendtime" value="${model.buyendtime}" placeholder="点击选择" class="form-control required" readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-buyendtime" type="text" name="buyendtime" value="${model.buyendtime}" placeholder="点击选择" class="form-control input-sm required" readonly >  </span>  </div></div>
                                
                             </div>
 							
                              <div class="form-group">
 						      <label class="control-label col-lg-2" for="code-prodstarttime">施工开始时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodstarttime" type="text" name="prodstarttime" value="${model.prodstarttime}" placeholder="点击选择" class="form-control " readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodstarttime" type="text" name="prodstarttime" value="${model.prodstarttime}" placeholder="点击选择" class="form-control input-sm " readonly >  </span>  </div></div>
                                
 							
 						      <label class="control-label col-lg-2" for="code-prodendtime">施工结束时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodendtime" type="text" name="prodendtime" value="${model.prodendtime}" placeholder="点击选择" class="form-control " readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodendtime" type="text" name="prodendtime" value="${model.prodendtime}" placeholder="点击选择" class="form-control input-sm " readonly >  </span>  </div></div>
                                
                             </div>
 							
                              <div class="form-group">
 						      <label class="control-label col-lg-2" for="code-prodoutstarttime">施工外协开始时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodoutstarttime" type="text" name="prodoutstarttime" value="${model.prodoutstarttime}" placeholder="点击选择" class="form-control required" readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodoutstarttime" type="text" name="prodoutstarttime" value="${model.prodoutstarttime}" placeholder="点击选择" class="form-control input-sm required" readonly >  </span>  </div></div>
                                
 							
 						      <label class="control-label col-lg-2" for="code-prodoutendtime">施工外协结束时间:</label>
-                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodoutendtime" type="text" name="prodoutendtime" value="${model.prodoutendtime}" placeholder="点击选择" class="form-control required" readonly >  </span>  </div></div>
+                               <div class="col-lg-3">  <div class="input-append datepicker date">  <span class="add-on">    <input id="code-prodoutendtime" type="text" name="prodoutendtime" value="${model.prodoutendtime}" placeholder="点击选择" class="form-control input-sm required" readonly >  </span>  </div></div>
                                
                             </div>
 							

@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -83,6 +84,9 @@ public class Customer_infoController {
         model.addAttribute("model", entity);
         
         // 在controller中设置页面控件用的数据
+                Map<String, com.ibusiness.component.form.entity.ConfFormTableColumn> relationshipstatusFTCMap= CommonBusiness.getInstance().getFormTableColumnMap("IB_CUSTOMER_INFO", "customerInfo");List<com.ibusiness.common.model.ConfSelectItem> relationshipstatusItems = (List<com.ibusiness.common.model.ConfSelectItem>) CommonUtils.getListFromJson(relationshipstatusFTCMap.get("RELATIONSHIPSTATUS").getConfSelectInfo(), com.ibusiness.common.model.ConfSelectItem.class);model.addAttribute("relationshipstatusItems", relationshipstatusItems);
+                Map<String, com.ibusiness.component.form.entity.ConfFormTableColumn> customernatureFTCMap= CommonBusiness.getInstance().getFormTableColumnMap("IB_CUSTOMER_INFO", "customerInfo");List<com.ibusiness.common.model.ConfSelectItem> customernatureItems = (List<com.ibusiness.common.model.ConfSelectItem>) CommonUtils.getListFromJson(customernatureFTCMap.get("CUSTOMERNATURE").getConfSelectInfo(), com.ibusiness.common.model.ConfSelectItem.class);model.addAttribute("customernatureItems", customernatureItems);
+                Map<String, com.ibusiness.component.form.entity.ConfFormTableColumn> cooperationinfoFTCMap= CommonBusiness.getInstance().getFormTableColumnMap("IB_CUSTOMER_INFO", "customerInfo");List<com.ibusiness.common.model.ConfSelectItem> cooperationinfoItems = (List<com.ibusiness.common.model.ConfSelectItem>) CommonUtils.getListFromJson(cooperationinfoFTCMap.get("COOPERATIONINFO").getConfSelectInfo(), com.ibusiness.common.model.ConfSelectItem.class);model.addAttribute("cooperationinfoItems", cooperationinfoItems);
         return "codegenerate/crmmanage/customer_info-input.jsp";
     }
 
@@ -123,12 +127,18 @@ public class Customer_infoController {
         return "redirect:/customer_info/customer_info-list.do";
     }
     /**
+     * 控件添加的方法 ========
+     */
+    
+    /**
      * excel导出
      */
     @SuppressWarnings("unchecked")
     @RequestMapping("customer_info-export")
     public void excelExport(@ModelAttribute Page page, @RequestParam Map<String, Object> parameterMap, HttpServletResponse response) {
         List<PropertyFilter> propertyFilters = PropertyFilter.buildFromMap(parameterMap);
+        // 根据当前公司(用户范围)ID进行查询
+    	propertyFilters = CommonBusiness.getInstance().editPFByScopeId(propertyFilters);
         page = customer_infoService.pagedQuery(page, propertyFilters);
         List<Customer_infoEntity> beans = (List<Customer_infoEntity>) page.getResult();
 
@@ -136,7 +146,7 @@ public class Customer_infoController {
         // excel文件名
         tableModel.setExcelName("客户信息表页面"+CommonUtils.getInstance().getCurrentDateTime());
         // 列名
-        tableModel.addHeaders("id", "customerno", "customerstate", "customername", "customeraddress", "phone", "telephone", "salesmanager", "infosource", "province", "city");
+        tableModel.addHeaders("id", "customerno", "customername", "customeraddress", "phone", "telephone", "salesmanager", "relationshipstatus", "province", "city", "customernature", "cooperationinfo", "invoicename", "bank", "accountno", "taxid", "invoiceuser", "invoiceusertel", "invoicemailunitname", "mailaddress", "invoiczip", "invoicaddressee");
         tableModel.setTableName("IB_CUSTOMER_INFO");
         tableModel.setData(beans);
         try {
@@ -156,7 +166,7 @@ public class Customer_infoController {
             // 
             TableModel tableModel = new TableModel();
             // 列名
-            tableModel.addHeaders("id", "customerno", "customerstate", "customername", "customeraddress", "phone", "telephone", "salesmanager", "infosource", "province", "city");
+            tableModel.addHeaders("id", "customerno", "customername", "customeraddress", "phone", "telephone", "salesmanager", "relationshipstatus", "province", "city", "customernature", "cooperationinfo", "invoicename", "bank", "accountno", "taxid", "invoiceuser", "invoiceusertel", "invoicemailunitname", "mailaddress", "invoiczip", "invoicaddressee");
             // 导入
             new ExcelCommon().uploadExcel(file, tableModel, "com.codegenerate.crmmanage.entity.Customer_infoEntity");
         } catch (Exception e) {

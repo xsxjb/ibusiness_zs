@@ -25,8 +25,6 @@ public class Customer_infoEntity implements java.io.Serializable {
 	private java.lang.String id;
 	/**customerno*/
 	private java.lang.String customerno;
-	/**customerstate*/
-	private java.lang.String customerstate;
 	/**customername*/
 	private java.lang.String customername;
 	/**customeraddress*/
@@ -37,12 +35,36 @@ public class Customer_infoEntity implements java.io.Serializable {
 	private java.lang.String telephone;
 	/**salesmanager*/
 	private java.lang.String salesmanager;
-	/**infosource*/
-	private java.lang.String infosource;
+	/**relationshipstatus*/
+	private java.lang.String relationshipstatus;
 	/**province*/
 	private java.lang.String province;
 	/**city*/
 	private java.lang.String city;
+	/**customernature*/
+	private java.lang.String customernature;
+	/**cooperationinfo*/
+	private java.lang.String cooperationinfo;
+	/**invoicename*/
+	private java.lang.String invoicename;
+	/**bank*/
+	private java.lang.String bank;
+	/**accountno*/
+	private java.lang.String accountno;
+	/**taxid*/
+	private java.lang.String taxid;
+	/**invoiceuser*/
+	private java.lang.String invoiceuser;
+	/**invoiceusertel*/
+	private java.lang.String invoiceusertel;
+	/**invoicemailunitname*/
+	private java.lang.String invoicemailunitname;
+	/**mailaddress*/
+	private java.lang.String mailaddress;
+	/**invoiczip*/
+	private java.lang.String invoiczip;
+	/**invoicaddressee*/
+	private java.lang.String invoicaddressee;
 	
 	/**
 	 *方法: 取得java.lang.String
@@ -77,22 +99,6 @@ public class Customer_infoEntity implements java.io.Serializable {
 	 */
 	public void setCustomerno(java.lang.String customerno){
 		this.customerno = customerno;
-	}
-	/**
-	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  customerstate
-	 */
-	@Column(name ="CUSTOMERSTATE",nullable=true,length=16)
-	public java.lang.String getCustomerstate(){
-		return this.customerstate;
-	}
-
-	/**
-	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  customerstate
-	 */
-	public void setCustomerstate(java.lang.String customerstate){
-		this.customerstate = customerstate;
 	}
 	/**
 	 *方法: 取得java.lang.String
@@ -176,19 +182,19 @@ public class Customer_infoEntity implements java.io.Serializable {
 	}
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  infosource
+	 *@return: java.lang.String  relationshipstatus
 	 */
-	@Column(name ="INFOSOURCE",nullable=true,length=16)
-	public java.lang.String getInfosource(){
-		return this.infosource;
+	@Column(name ="RELATIONSHIPSTATUS",nullable=true,length=16)
+	public java.lang.String getRelationshipstatus(){
+		return this.relationshipstatus;
 	}
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  infosource
+	 *@param: java.lang.String  relationshipstatus
 	 */
-	public void setInfosource(java.lang.String infosource){
-		this.infosource = infosource;
+	public void setRelationshipstatus(java.lang.String relationshipstatus){
+		this.relationshipstatus = relationshipstatus;
 	}
 	/**
 	 *方法: 取得java.lang.String
@@ -221,5 +227,197 @@ public class Customer_infoEntity implements java.io.Serializable {
 	 */
 	public void setCity(java.lang.String city){
 		this.city = city;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  customernature
+	 */
+	@Column(name ="CUSTOMERNATURE",nullable=true,length=16)
+	public java.lang.String getCustomernature(){
+		return this.customernature;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  customernature
+	 */
+	public void setCustomernature(java.lang.String customernature){
+		this.customernature = customernature;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  cooperationinfo
+	 */
+	@Column(name ="COOPERATIONINFO",nullable=true,length=2)
+	public java.lang.String getCooperationinfo(){
+		return this.cooperationinfo;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  cooperationinfo
+	 */
+	public void setCooperationinfo(java.lang.String cooperationinfo){
+		this.cooperationinfo = cooperationinfo;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  invoicename
+	 */
+	@Column(name ="INVOICENAME",nullable=true,length=64)
+	public java.lang.String getInvoicename(){
+		return this.invoicename;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  invoicename
+	 */
+	public void setInvoicename(java.lang.String invoicename){
+		this.invoicename = invoicename;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  bank
+	 */
+	@Column(name ="BANK",nullable=true,length=64)
+	public java.lang.String getBank(){
+		return this.bank;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  bank
+	 */
+	public void setBank(java.lang.String bank){
+		this.bank = bank;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  accountno
+	 */
+	@Column(name ="ACCOUNTNO",nullable=true,length=32)
+	public java.lang.String getAccountno(){
+		return this.accountno;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  accountno
+	 */
+	public void setAccountno(java.lang.String accountno){
+		this.accountno = accountno;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  taxid
+	 */
+	@Column(name ="TAXID",nullable=true,length=32)
+	public java.lang.String getTaxid(){
+		return this.taxid;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  taxid
+	 */
+	public void setTaxid(java.lang.String taxid){
+		this.taxid = taxid;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  invoiceuser
+	 */
+	@Column(name ="INVOICEUSER",nullable=true,length=32)
+	public java.lang.String getInvoiceuser(){
+		return this.invoiceuser;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  invoiceuser
+	 */
+	public void setInvoiceuser(java.lang.String invoiceuser){
+		this.invoiceuser = invoiceuser;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  invoiceusertel
+	 */
+	@Column(name ="INVOICEUSERTEL",nullable=true,length=16)
+	public java.lang.String getInvoiceusertel(){
+		return this.invoiceusertel;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  invoiceusertel
+	 */
+	public void setInvoiceusertel(java.lang.String invoiceusertel){
+		this.invoiceusertel = invoiceusertel;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  invoicemailunitname
+	 */
+	@Column(name ="INVOICEMAILUNITNAME",nullable=true,length=64)
+	public java.lang.String getInvoicemailunitname(){
+		return this.invoicemailunitname;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  invoicemailunitname
+	 */
+	public void setInvoicemailunitname(java.lang.String invoicemailunitname){
+		this.invoicemailunitname = invoicemailunitname;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  mailaddress
+	 */
+	@Column(name ="MAILADDRESS",nullable=true,length=128)
+	public java.lang.String getMailaddress(){
+		return this.mailaddress;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  mailaddress
+	 */
+	public void setMailaddress(java.lang.String mailaddress){
+		this.mailaddress = mailaddress;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  invoiczip
+	 */
+	@Column(name ="INVOICZIP",nullable=true,length=10)
+	public java.lang.String getInvoiczip(){
+		return this.invoiczip;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  invoiczip
+	 */
+	public void setInvoiczip(java.lang.String invoiczip){
+		this.invoiczip = invoiczip;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  invoicaddressee
+	 */
+	@Column(name ="INVOICADDRESSEE",nullable=true,length=64)
+	public java.lang.String getInvoicaddressee(){
+		return this.invoicaddressee;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  invoicaddressee
+	 */
+	public void setInvoicaddressee(java.lang.String invoicaddressee){
+		this.invoicaddressee = invoicaddressee;
 	}
 }

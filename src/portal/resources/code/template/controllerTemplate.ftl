@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,6 +46,7 @@ import ${bussiPackage}.${entityPackage}.service.${entityName}Service;
 public class ${entityName}Controller {
 
     private MessageHelper messageHelper;
+    private com.ibusiness.doc.store.StoreConnector storeConnector;
     private ${entityName}Service ${entityName?uncap_first}Service;
    /**
      * 列表
@@ -104,8 +106,6 @@ public class ${entityName}Controller {
         String id = entity.getId();
         if (CommonUtils.isNull(id)) {
             entity.setId(UUID.randomUUID().toString());
-            // 设置范围ID
-            entity.setScopeid(CommonBusiness.getInstance().getCurrentUserScopeId());
             ${entityName?uncap_first}Service.insert(entity);
         } else {
             ${entityName?uncap_first}Service.update(entity);
@@ -130,12 +130,23 @@ public class ${entityName}Controller {
         return "redirect:/${entityName?uncap_first}/${entityName?uncap_first}-list.do";
     }
     /**
+     * 控件添加的方法 ========
+     */
+    <#list columns as po>
+            <#list po.methodList as me>
+                ${me}
+            </#list>
+    </#list>
+    
+    /**
      * excel导出
      */
     @SuppressWarnings("unchecked")
     @RequestMapping("${entityName?uncap_first}-export")
     public void excelExport(@ModelAttribute Page page, @RequestParam Map<String, Object> parameterMap, HttpServletResponse response) {
         List<PropertyFilter> propertyFilters = PropertyFilter.buildFromMap(parameterMap);
+        // 根据当前公司(用户范围)ID进行查询
+    	propertyFilters = CommonBusiness.getInstance().editPFByScopeId(propertyFilters);
         page = ${entityName?uncap_first}Service.pagedQuery(page, propertyFilters);
         List<${entityName}Entity> beans = (List<${entityName}Entity>) page.getResult();
 
@@ -176,10 +187,12 @@ public class ${entityName}Controller {
     public void setMessageHelper(MessageHelper messageHelper) {
         this.messageHelper = messageHelper;
     }
-
     @Resource
     public void set${entityName}Service(${entityName}Service ${entityName?uncap_first}Service) {
         this.${entityName?uncap_first}Service = ${entityName?uncap_first}Service;
     }
-    
+    @Resource
+	public void setStoreConnector(com.ibusiness.doc.store.StoreConnector storeConnector) {
+	    this.storeConnector = storeConnector;
+	}
 }

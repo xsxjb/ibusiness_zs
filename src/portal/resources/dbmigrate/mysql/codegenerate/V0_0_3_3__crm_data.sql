@@ -7,7 +7,7 @@ INSERT INTO IB_CONF_COMPONENT(ID,PACKAGENAME,MODULENAME,PARENTID,TYPEID) VALUES(
 INSERT INTO IB_CONF_COMPONENT(ID,PACKAGENAME,MODULENAME,PARENTID,TYPEID) VALUES('crmmanage10006','crmmanage','流程设计器','crmmanage10001','Bpm');
 
 /* ================= 菜单管理表  ==================   */
-INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID) VALUES('crmmanageOne','商务管理','1','#','URL','5','0');
+INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID) VALUES('crmmanageOne','商务管理','1','#','URL','4','0');
 INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID) VALUES('crmmanageTwo1','客户管理','2','#','URL','1','crmmanageOne');
 INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID) VALUES('crmmanageTwo2','供应商管理','2','#','URL','1','crmmanageOne');
 INSERT INTO IB_MENU(ID,MENUNAME,MENULEVEL,MENUURL,MENUIFRAME,MENUORDER,PARENTID) VALUES('crmmanageThree1','客户信息管理','3','/customer_info/customer_info-list.do','URL','1','crmmanageTwo1');
@@ -22,42 +22,71 @@ INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('crmmanageThree2','2');
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('crmmanageThree3','2');
 INSERT INTO IB_MENU_ROLE_DEF(MENU_ID,ROLE_DEF_ID) VALUES('crmmanageThree4','2');
 
-/* ============================= 业务表管理表 =============================   */
-INSERT INTO IB_CONF_TABLE(ID,PACKAGENAME,TABLENAME,TABLENAMECOMMENT,TABLETYPE,ISBPMTABLE) VALUES('ib_supplier10001','crmmanage','IB_SUPPLIER','原材料供应商维护','1',2);
 
-/* ============================= 表列字段管理表  ============================= */
-/* ====== 客户信息表 =====  */
+/* ================================================================================   */
+/* ================================  客户管理表    =================================   */
+/* ================================================================================   */
+/*======= 表单 ==========*/
+insert into ib_conf_form(ID,PACKAGENAME,FORMNAME,FORMTITLE,FORMURL, ISEDIT,ISADD,ISDELETE,ISQUERY,ISEXCELEXPORT,ISIMPORTEXPORT,ISBPMFORM) values ('customerInfo001','crmmanage','customerInfo','客户信息管理','/customer_info/customer_info-list.do',1,1,1,1,1,1,2);
+/*======= 表单对应表 ==========*/
+insert into ib_conf_form_table(PACKAGENAME,FORMNAME,TABLENAME,TABLETYPE) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO','main');
 /*======= 表单字段 ==========*/
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERNO','客户编号','CUSTOMERNO','IB_CUSTOMER_INFO',1,'1','','','1','1','2','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERSTATE','客户状态','CUSTOMERSTATE','IB_CUSTOMER_INFO',2,'1','','','1','1','2','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERADDRESS','客户地址','CUSTOMERADDRESS','IB_CUSTOMER_INFO',5,'1','','','1','1','2','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.PHONE','手机','PHONE','IB_CUSTOMER_INFO',6,'1','','','1','1','2','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.TELEPHONE','联系电话','TELEPHONE','IB_CUSTOMER_INFO',7,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERNO','客户编号','CUSTOMERNO','IB_CUSTOMER_INFO',1,'1','','','1','1','2','2','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERNAME','客户名称','CUSTOMERNAME','IB_CUSTOMER_INFO',2,'1','','','1','1','1','1','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERADDRESS','客户地址','CUSTOMERADDRESS','IB_CUSTOMER_INFO',5,'2','','','1','1','2','1','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.PHONE','手机','PHONE','IB_CUSTOMER_INFO',6,'1','','','1','1','2','2','','{"maxlength":"15","minlength":"11"}');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.TELEPHONE','联系电话','TELEPHONE','IB_CUSTOMER_INFO',7,'1','','','1','1','2','2','','{"maxlength":"15","minlength":"7"}');
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.SALESMANAGER','负责经理','SALESMANAGER','IB_CUSTOMER_INFO',8,'1','','','1','1','2','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERNAME','客户名称','CUSTOMERNAME','IB_CUSTOMER_INFO',10,'1','','','1','1','1','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.INFOSOURCE','信息来源','INFOSOURCE','IB_CUSTOMER_INFO',11,'1','','','1','1','2','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.PROVINCE','省','PROVINCE','IB_CUSTOMER_INFO',13,'1','','','1','1','2','','','');
-insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CITY','市','CITY','IB_CUSTOMER_INFO',14,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.RELATIONSHIPSTATUS','关系状态','RELATIONSHIPSTATUS','IB_CUSTOMER_INFO',12,'6','','','1','1','2','2','','[{"key":"1","value":"未签合同"},{"key":"2","value":"以签合同"},{"key":"2","value":"以施工"},{"key":"2","value":"施工完毕"}]');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.PROVINCE','省','PROVINCE','IB_CUSTOMER_INFO',13,'1','','','1','1','2','2','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CITY','市','CITY','IB_CUSTOMER_INFO',14,'1','','','1','1','2','2','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.CUSTOMERNATURE','企业性质','CUSTOMERNATURE','IB_CUSTOMER_INFO',15,'6','','','1','1','2','2','','[{"key":"1","value":"私企"},{"key":"2","value":"外企"},{"key":"2","value":"国企"},{"key":"2","value":"上市公司"}]');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.COOPERATIONINFO','是否以合作','COOPERATIONINFO','IB_CUSTOMER_INFO',19,'6','','','1','1','2','1','','[{"key":"1","value":"是"},{"key":"2","value":"否"}]');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.INVOICENAME','客户发票单位名称','INVOICENAME','IB_CUSTOMER_INFO',20,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.BANK','开户行','BANK','IB_CUSTOMER_INFO',21,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.ACCOUNTNO','帐号','ACCOUNTNO','IB_CUSTOMER_INFO',22,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.TAXID','税号','TAXID','IB_CUSTOMER_INFO',23,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.INVOICEUSER','开票联系人','INVOICEUSER','IB_CUSTOMER_INFO',24,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.INVOICEUSERTEL','联系电话','INVOICEUSERTEL','IB_CUSTOMER_INFO',25,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.INVOICEMAILUNITNAME','发票邮寄单位名称','INVOICEMAILUNITNAME','IB_CUSTOMER_INFO',26,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.MAILADDRESS','邮寄地址','MAILADDRESS','IB_CUSTOMER_INFO',27,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.INVOICZIP','邮编','INVOICZIP','IB_CUSTOMER_INFO',28,'1','','','1','1','2','','','');
+insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN, TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT, CONFSELECTINFO) values ('crmmanage','customerInfo','IB_CUSTOMER_INFO.INVOICADDRESSEE','收件人','INVOICADDRESSEE','IB_CUSTOMER_INFO',29,'1','','','1','1','2','','','');
 /*======= 表 ==========*/
 insert into ib_conf_table(ID,PACKAGENAME,TABLENAME,TABLENAMECOMMENT,TABLETYPE, PARENTTABLEID,ISBPMTABLE) values ('ib_customer_info10001','crmmanage','IB_CUSTOMER_INFO','客户信息表','1','null',2);
 /*======= 表字段 ==========*/
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','CUSTOMERNO','客户编号','VARCHAR','64','是','',1);
-insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','CUSTOMERSTATE','客户状态','VARCHAR','16','是','',2);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','CUSTOMERNAME','客户名称','VARCHAR','64','是','',2);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','CUSTOMERADDRESS','客户地址','VARCHAR','512','是','',5);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','PHONE','手机','VARCHAR','32','是','',6);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','TELEPHONE','联系电话','VARCHAR','32','是','',7);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','SALESMANAGER','负责经理','VARCHAR','32','是','',8);
-insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','CUSTOMERNAME','客户名称','VARCHAR','64','是','',10);
-insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','INFOSOURCE','信息来源','VARCHAR','16','是','',11);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','RELATIONSHIPSTATUS','关系状态','VARCHAR','16','是','',12);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','PROVINCE','省','VARCHAR','16','是','',13);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','CITY','市','VARCHAR','16','是','',14);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','CUSTOMERNATURE','企业性质','VARCHAR','16','是','',15);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','COOPERATIONINFO','是否以合作信息表','VARCHAR','2','是','',19);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','INVOICENAME','客户发票单位名称','VARCHAR','64','是','',20);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','BANK','开户行','VARCHAR','64','是','',21);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','ACCOUNTNO','帐号','VARCHAR','32','是','',22);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','TAXID','税号','VARCHAR','32','是','',23);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','INVOICEUSER','开票联系人','VARCHAR','32','是','',24);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','INVOICEUSERTEL','联系电话','VARCHAR','16','是','',25);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','INVOICEMAILUNITNAME','发票邮寄单位名称','VARCHAR','64','是','',26);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','MAILADDRESS','邮寄地址','VARCHAR','128','是','',27);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','INVOICZIP','邮编','VARCHAR','10','是','',28);
+insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','INVOICADDRESSEE','收件人','VARCHAR','64','是','',29);
 insert into ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize, isNull,defaultValue,columnNo) values ('IB_CUSTOMER_INFO','ID','UUID主键','VARCHAR','64','否','',91);
-/* ====================== 客户信息管理 ======================= */
 /* ====================== 客户信息表  初始数据 插入 ======================= */
-insert into ib_customer_info(ID,CUSTOMERNO,CUSTOMERSTATE,CUSTOMERNAME,CUSTOMERADDRESS,PHONE,TELEPHONE,SALESMANAGER,INFOSOURCE,PROVINCE,CITY) values ('402880174a1db391014a1db4f6580000','100001','1','哈尔滨第一销售公司','哈尔滨市南岗区XX街道','13333344444','84644444','张经理','1','黑龙江','哈尔滨');
-insert into ib_customer_info(ID,CUSTOMERNO,CUSTOMERSTATE,CUSTOMERNAME,CUSTOMERADDRESS,PHONE,TELEPHONE,SALESMANAGER,INFOSOURCE,PROVINCE,CITY) values ('402880174a1db391014a1db4f6c50001','100002','1','哈尔滨第二开发公司','哈尔滨市道理区XX街道1','13333344445','84655555','王经理','2','黑龙江','哈尔滨');
+insert into ib_customer_info(ID,CUSTOMERNO,CUSTOMERNAME,CUSTOMERADDRESS,PHONE,TELEPHONE,SALESMANAGER,RELATIONSHIPSTATUS,PROVINCE,CITY,CUSTOMERNATURE,COOPERATIONINFO,INVOICENAME,BANK,ACCOUNTNO,TAXID,INVOICEUSER,INVOICEUSERTEL,INVOICEMAILUNITNAME,MAILADDRESS,INVOICZIP,INVOICADDRESSEE) values ('402880174a1db391014a1db4f6580000','100001','哈尔滨第一销售公司','哈尔滨市南岗区XX街道','13333344444','84644444','张经理','1','黑龙江','哈尔滨','股份制','1','11','1','1','1','1','1','1','11','1','1');
+insert into ib_customer_info(ID,CUSTOMERNO,CUSTOMERNAME,CUSTOMERADDRESS,PHONE,TELEPHONE,SALESMANAGER,RELATIONSHIPSTATUS,PROVINCE,CITY,CUSTOMERNATURE,COOPERATIONINFO,INVOICENAME,BANK,ACCOUNTNO,TAXID,INVOICEUSER,INVOICEUSERTEL,INVOICEMAILUNITNAME,MAILADDRESS,INVOICZIP,INVOICADDRESSEE) values ('402880174a1db391014a1db4f6c50001','100002','哈尔滨第二开发公司','哈尔滨市道理区XX街道1','13333344445','84655555','王经理','2','黑龙江','哈尔滨','私营','2','222','2','2','2','2','2','2','2','2','2');
 
-
+/* ================================================================================   */
+/* ================================  原材料供应商维护表 ==============================   */
+/* ================================================================================   */
+/* ============================= 业务表管理表 =============================   */
+INSERT INTO IB_CONF_TABLE(ID,PACKAGENAME,TABLENAME,TABLENAMECOMMENT,TABLETYPE,ISBPMTABLE) VALUES('ib_supplier10001','crmmanage','IB_SUPPLIER','原材料供应商维护','1',2);
+/* ============================= 表列字段管理表  ============================= */
 /* ====== 原材料供应商维护表 =====  */
 INSERT INTO ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) VALUES ('IB_SUPPLIER','ACCOUNTNO','帐号','VARCHAR','32','是','',28);
 INSERT INTO ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) VALUES ('IB_SUPPLIER','BENEFICIARY','开户行','VARCHAR','128','是','',26);
@@ -95,15 +124,10 @@ INSERT INTO ib_conf_table_columns(tableName,columnValue,columnName,columnType,co
 INSERT INTO ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) VALUES ('IB_SUPPLIER','YOURCOMPANY','收件公司','VARCHAR','128','是','',29);
 INSERT INTO ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) VALUES ('IB_SUPPLIER','YOURNAME','收件人姓名','VARCHAR','32','是','',31);
 INSERT INTO ib_conf_table_columns(tableName,columnValue,columnName,columnType,columnSize,isNull,defaultValue,columnNo) VALUES ('IB_SUPPLIER','YOURPHONE','联系电话','VARCHAR','16','是','',32);
-
 /* ============================= 表单管理表 =============================  */
-INSERT INTO ib_conf_form(ID,PACKAGENAME,FORMNAME,FORMTITLE,ISEDIT,ISADD,ISDELETE,ISQUERY,ISEXCELEXPORT,ISIMPORTEXPORT,ISBPMFORM,FORMURL) VALUES('customerInfo001','crmmanage','customerInfo','客户信息管理',1,1,1,1,1,1,2,'/customer_info/customer_info-list.do');
 INSERT INTO ib_conf_form(ID,PACKAGENAME,FORMNAME,FORMTITLE,ISEDIT,ISADD,ISDELETE,ISQUERY,ISEXCELEXPORT,ISIMPORTEXPORT,ISBPMFORM,FORMURL) VALUES('supplierInfo001','crmmanage','supplierInfo','供应商管理',1,1,1,1,1,1,2,'/supplier/supplier-list.do');
-
 /* ============================= 表单对应数据表管理表 =============================  */
-INSERT INTO ib_conf_form_table(PACKAGENAME,FORMNAME,TABLENAME,TABLETYPE) VALUES('crmmanage','customerInfo','IB_CUSTOMER_INFO','main');
 INSERT INTO ib_conf_form_table(PACKAGENAME,FORMNAME,TABLENAME,TABLETYPE) VALUES('crmmanage','supplierInfo','IB_SUPPLIER','main');
-
 /* ============================= 表单对应字段管理表 =============================  */
 /* ====================== 供应商管理 ======================= */
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('crmmanage','supplierInfo','IB_SUPPLIER.ACCOUNTNO','帐号','ACCOUNTNO','IB_SUPPLIER',28,'1',NULL,NULL,'1','1','2',NULL,NULL,NULL);
@@ -141,4 +165,3 @@ insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMN
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('crmmanage','supplierInfo','IB_SUPPLIER.YOURCOMPANY','收件公司','YOURCOMPANY','IB_SUPPLIER',29,'1',NULL,NULL,'1','1','2',NULL,NULL,NULL);
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('crmmanage','supplierInfo','IB_SUPPLIER.YOURNAME','收件人姓名','YOURNAME','IB_SUPPLIER',31,'1',NULL,NULL,'1','1','2',NULL,NULL,NULL);
 insert into ib_conf_form_table_colums(PACKAGENAME,FORMNAME,FORMCOLUMN,FORMCOLUMNTITLE,TABLECOLUMN,TABLENAME,COLUMNNO,FCTYPE,FCWIDTH,FCHEIGHT,FCDISPLAY,FCEDIT,FCQUERY,FCMUST,FCDEFAULT,CONFSELECTINFO) values ('crmmanage','supplierInfo','IB_SUPPLIER.YOURPHONE','联系电话','YOURPHONE','IB_SUPPLIER',32,'1',NULL,NULL,'1','1','2',NULL,NULL,NULL);
-

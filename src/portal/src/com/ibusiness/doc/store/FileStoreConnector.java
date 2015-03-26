@@ -1,13 +1,11 @@
 package com.ibusiness.doc.store;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,11 +21,15 @@ public class FileStoreConnector implements StoreConnector {
         String prefix = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String suffix = this.getSuffix(originName);
         String path = prefix + "/" + UUID.randomUUID() + suffix;
+        
+        // 绝对路径
+        String pathStr = this.getClass().getResource("/").getPath();
+        pathStr = pathStr.replace("WEB-INF/classes/", "");
         // 创建一个目录，它的路径名由当前 File 对象指定，包括任一必须的父路径
-        File dir = new File(baseDir + "/" + model + "/" + prefix);
+        File dir = new File(pathStr + baseDir + "/" + model + "/" + prefix);
         dir.mkdirs();
 
-        File targetFile = new File(baseDir + "/" + model + "/" + path);
+        File targetFile = new File(pathStr + baseDir + "/" + model + "/" + path);
         FileOutputStream fos = new FileOutputStream(targetFile);
 
         try {
@@ -45,7 +47,7 @@ public class FileStoreConnector implements StoreConnector {
         return storeDto;
     }
 
-    public StoreDTO get(String model, String key) throws Exception {
+	public StoreDTO get(String model, String key) throws Exception {
         if (key.indexOf("../") != -1) {
             StoreDTO storeDto = new StoreDTO();
             storeDto.setModel(model);
