@@ -19,6 +19,8 @@
 		    asc: ${page.asc},
 		    params: {
 		        'filter_LIKES_id': '${param.filter_LIKES_id}'
+		                ,'filter_LIKES_customername': '${param.filter_LIKES_customername}'
+		                ,'filter_LIKES_typeflag': '${param.filter_LIKES_typeflag}'
 		    },
 			selectedItemClass: 'selectedItem',
 			gridFormId: 'gridForm',
@@ -48,6 +50,10 @@
 	          <div id="search" class="content content-inner">
 				  <form name="cgForm" method="post" action="contract_manage-list.do" class="form-inline">
 				    <div class="form-group">
+				                <label for="code_table_customername">客户名称:</label>
+				                <input type="text" id="code_table_customername" name="filter_LIKES_customername" value="${param.filter_LIKES_customername}">
+				                <label for="code_table_typeflag">合同状态:</label>
+				                <input type="text" id="code_table_typeflag" name="filter_LIKES_typeflag" value="${param.filter_LIKES_typeflag}">
 					    <button class="btn btn-primary btn-sm" onclick="document.cgForm.submit()"><span class="glyphicon glyphicon-search"></span>查询</button>
 					</div>
 				 </form>
@@ -77,13 +83,10 @@
 			      <thead>
 				      <tr>
 				        <th width="30" class="m-table-check"><input type="checkbox" name="checkAll" onchange="toggleSelectedItems(this.checked)"></th>
-					                <th class="sorting">合同名</th>
 					                <th class="sorting">客户名称</th>
-					                <th class="sorting">工程项目名称</th>
-					                <th class="sorting">合同文件地址</th>
 					                <th class="sorting">客户地址</th>
 					                <th class="sorting">客户电话</th>
-					                <th class="sorting">备注</th>
+					                <th class="sorting">合同状态</th>
 				        <th width="30">&nbsp;</th>
 				      </tr>
 				    </thead>
@@ -91,13 +94,10 @@
 					      <c:forEach items="${page.result}" var="item" varStatus="status">  
 					      <tr class="${status.index%2==1? 'active':''}">
 					        <td><input type="checkbox" class="selectedItem a-check" name="selectedItem" value="${item.id}"></td>
-						            <td>${item.contractname}</td>
 						            <td>${item.customername}</td>
-						            <td>${item.projectname}</td>
-						            <td>${item.contracturl}</td>
 						            <td>${item.address}</td>
 						            <td>${item.customerphone}</td>
-						            <td>${item.remark}</td>
+						            <td>${item.typeflag}</td>
 					        <td>
 					          <a href="contract_manage-input.do?id=${item.id}" class="a-update" data-target="#modalInput" data-toggle="modal" data-database="true"><span class="glyphicon glyphicon-pencil"></span></a>
 					        </td>

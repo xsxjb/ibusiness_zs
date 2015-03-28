@@ -85,6 +85,7 @@ public class Contract_manageController {
         model.addAttribute("model", entity);
         
         // 在controller中设置页面控件用的数据
+                Map<String, com.ibusiness.component.form.entity.ConfFormTableColumn> typeflagFTCMap= CommonBusiness.getInstance().getFormTableColumnMap("IB_CONTRACT_MANAGE", "CONTRACTMANAGE");List<com.ibusiness.common.model.ConfSelectItem> typeflagItems = (List<com.ibusiness.common.model.ConfSelectItem>) CommonUtils.getListFromJson(typeflagFTCMap.get("TYPEFLAG").getConfSelectInfo(), com.ibusiness.common.model.ConfSelectItem.class);model.addAttribute("typeflagItems", typeflagItems);
         return "codegenerate/designmanage/contract_manage-input.jsp";
     }
 
@@ -127,7 +128,42 @@ public class Contract_manageController {
     /**
      * 控件添加的方法 ========
      */
-    
+	@ResponseBody
+	@RequestMapping("contracturl-upload")
+	public String contracturlUpload(
+			@org.springframework.beans.factory.annotation.Qualifier("attachment") MultipartFile attachment,
+			HttpServletResponse response) {
+		com.ibusiness.doc.store.StoreDTO storeDTO = null;
+		if (null != attachment && attachment.getSize() > 0) {
+			try {
+				storeDTO = storeConnector.save("contract",
+						attachment.getInputStream(),
+						attachment.getOriginalFilename());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null == storeDTO ? "" : storeDTO.getKey();
+	}
+
+	@RequestMapping("contracturl-download")
+	public void contracturlDownload(@RequestParam("path") String path,
+			@RequestParam("filename") String filename,
+			HttpServletResponse response) throws Exception {
+		java.io.InputStream is = null;
+		try {
+			com.ibusiness.core.util.ServletUtils.setFileDownloadHeader(
+					response, filename);
+			is = storeConnector.get("contract", path).getInputStream();
+			com.ibusiness.core.util.IoUtils.copyStream(is,
+					response.getOutputStream());
+		} finally {
+			if (is != null) {
+				is.close();
+			}
+		}
+	}
+
     /**
      * excel导出
      */
@@ -144,7 +180,7 @@ public class Contract_manageController {
         // excel文件名
         tableModel.setExcelName("合同管理页面"+CommonUtils.getInstance().getCurrentDateTime());
         // 列名
-        tableModel.addHeaders("contractname", "customername", "projectname", "contracturl", "address", "customerphone", "remark", "id", "scopeid");
+        tableModel.addHeaders("contractname", "customername", "projectname", "contracturl", "address", "customerphone", "remark", "id", "scopeid", "typeflag");
         tableModel.setTableName("IB_CONTRACT_MANAGE");
         tableModel.setData(beans);
         try {
@@ -164,7 +200,7 @@ public class Contract_manageController {
             // 
             TableModel tableModel = new TableModel();
             // 列名
-            tableModel.addHeaders("contractname", "customername", "projectname", "contracturl", "address", "customerphone", "remark", "id", "scopeid");
+            tableModel.addHeaders("contractname", "customername", "projectname", "contracturl", "address", "customerphone", "remark", "id", "scopeid", "typeflag");
             // 导入
             new ExcelCommon().uploadExcel(file, tableModel, "com.codegenerate.designmanage.entity.Contract_manageEntity");
         } catch (Exception e) {
