@@ -32,7 +32,7 @@
         <div class="panel-body">
             <div class="col-lg-12">
             <div class="media">
-				<a href="#" class="pull-left"><img id="designflag" src="wait.jpg" height="40" class="media-object"/></a>
+				<a href="#" onclick="getImgData('design');" class="pull-left"><img id="designflag" src="wait.jpg" height="40" class="media-object"/></a>
 				<div class="media-body">
 					<h4 class="media-heading">
 						 设计图纸
@@ -46,21 +46,21 @@
 							</h4> 拆除, 搬运, 清理
 							<!-- 水电工程 -->
 							<div class="media">
-								<a href="#" class="pull-left"><img id="waterflag" src="wait.jpg" height="40" class="media-object"/></a>
+								<a href="#" onclick="getImgData('water');" class="pull-left"><img id="waterflag" src="wait.jpg" height="40" class="media-object"/></a>
 								<div class="media-body">
 									<h4 class="media-heading">
 										水电工程
 									</h4> 结构材料，水管五金，电气材料，排放线路，水管排线
 									<!-- 泥木工程 -->
 									<div class="media">
-										<a href="#" class="pull-left"><img id="tileflag" src="wait.jpg" height="40" class="media-object"/></a>
+										<a href="#" onclick="getImgData('tile');" class="pull-left"><img id="tileflag" src="wait.jpg" height="40" class="media-object"/></a>
 										<div class="media-body">
 											<h4 class="media-heading">
 												泥木工程
 											</h4> 砌砖，隔墙，门窗，水泥粉刷，铺理石，地砖，瓷砖
 											<!-- 金属工程 -->
 											<div class="media">
-												<a href="#" class="pull-left"><img id="metalflag" src="wait.jpg" height="40" class="media-object"/></a>
+												<a href="#" onclick="getImgData('metal');" class="pull-left"><img id="metalflag" src="wait.jpg" height="40" class="media-object"/></a>
 												<div class="media-body">
 													<h4 class="media-heading">
 														金属工程
@@ -72,7 +72,7 @@
 									
 									<!-- 油漆工程 -->
 									<div class="media">
-										<a href="#" class="pull-left"><img id="wallflag" src="wait.jpg" height="40" class="media-object"/></a>
+										<a href="#" onclick="getImgData('wall');" class="pull-left"><img id="wallflag" src="wait.jpg" height="40" class="media-object"/></a>
 										<div class="media-body">
 											<h4 class="media-heading">
 												油漆工程
@@ -83,7 +83,7 @@
 							</div>
 							<!-- 木工工程 -->
 							<div class="media">
-								<a href="#" class="pull-left"><img id="floorflag" src="wait.jpg" height="40" class="media-object"/></a>
+								<a href="#" onclick="getImgData('floor');" class="pull-left"><img id="floorflag" src="wait.jpg" height="40" class="media-object"/></a>
 								<div class="media-body">
 									<h4 class="media-heading">
 										木工工程
@@ -96,7 +96,7 @@
 					
 					<!-- 表面工程 -->
 					<div class="media">
-						<a href="#" class="pull-left"><img id="surfaceflag" src="wait.jpg" height="40" class="media-object"/></a>
+						<a href="#" onclick="getImgData('surface');" class="pull-left"><img id="surfaceflag" src="wait.jpg" height="40" class="media-object"/></a>
 						<div class="media-body">
 							<h4 class="media-heading">
 								表面工程
@@ -107,7 +107,7 @@
 				<!--  -->
 				<!-- 竣工验收 -->
 				<div class="media">
-					<a href="#" class="pull-left"><img id="doneflag" src="wait.jpg" height="40" class="media-object"/></a>
+					<a href="#" onclick="getImgData('done');" class="pull-left"><img id="doneflag" src="wait.jpg" height="40" class="media-object"/></a>
 					<div class="media-body">
 						<h4 class="media-heading">
 							竣工验收
@@ -202,37 +202,45 @@
 		initData();
 		// 取得图片数据
 		function getImgData(imgtype) {
-			var urlstr = "/portal/rs/html/html-progress-demolitionimg?progressid="+GetQueryString("id")+"&imgtype="+imgtype;
-			$.ajax({
-				type: "post",
-			    url: urlstr,
-				dataType: "json",
-				success: function(json){
-					var content = "";
-					var count = json.length;
-					for(var i=0; i < count; i++){
-						content = content + '<div class="col-md-4">';
-						content = content + '<div class="thumbnail">';
-						content = content + '<img alt="300x200" src="../../ibresources/progress/'+json[i].imgurl+'" />';
-						content = content + '<div class="caption">';
-						content = content + '<p>';
-						content = content + json[i].imginfo;
-						content = content + '</p>';
-						content = content + '</div>';
-						content = content + '</div>';
-						content = content + '</div>';
+			//
+			if ("finish.jpg" == $("#"+imgtype+"flag").attr("src")) {
+				// 完成查看图片
+				var progressid=GetQueryString("id");
+				progressid = progressid.replace("#","");
+				var urlstr = "/portal/rs/html/html-progress-demolitionimg?progressid="+progressid+"&imgtype="+imgtype;
+				$.ajax({
+					type: "post",
+				    url: urlstr,
+					dataType: "json",
+					success: function(json){
+						var content = "";
+						var count = json.length;
+						for(var i=0; i < count; i++){
+							content = content + '<div class="col-md-4">';
+							content = content + '<div class="thumbnail">';
+							content = content + '<img alt="300x200" src="../../ibresources/progress/'+json[i].imgurl+'" />';
+							content = content + '<div class="caption">';
+							content = content + '<p>';
+							content = content + json[i].imginfo;
+							content = content + '</p>';
+							content = content + '</div>';
+							content = content + '</div>';
+							content = content + '</div>';
+						}
+						var carousel_indicators = document.getElementById("imgModalDiv").innerHTML = content;
+						
+						
+						// 通过是否完成状态设置显示图片
+						// ===============================================
+						$('#imgModalInput').modal('show');
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+						alert("服务器异常请稍后再试。");
 					}
-					var carousel_indicators = document.getElementById("imgModalDiv").innerHTML = content;
-					
-					
-					// 通过是否完成状态设置显示图片
-					// ===============================================
-					$('#imgModalInput').modal('show');
-				},
-				error: function(XMLHttpRequest, textStatus, errorThrown){
-					alert("服务器异常请稍后再试。");
-				}
-			});
+				});
+			} else {
+				
+			};
 		}
 		
 	</script>
