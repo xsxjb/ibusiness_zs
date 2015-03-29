@@ -1,6 +1,9 @@
 package com.webservice.rs;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,6 +17,7 @@ import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Component;
 
+import com.codegenerate.designmanage.entity.Contract_manageEntity;
 import com.codegenerate.designmanage.entity.Pp_demolition_imgEntity;
 import com.codegenerate.designmanage.entity.Pp_design_imgEntity;
 import com.codegenerate.designmanage.entity.Pp_done_imgEntity;
@@ -24,6 +28,7 @@ import com.codegenerate.designmanage.entity.Pp_tile_imgEntity;
 import com.codegenerate.designmanage.entity.Pp_wall_imgEntity;
 import com.codegenerate.designmanage.entity.Pp_water_imgEntity;
 import com.codegenerate.designmanage.entity.Project_progressEntity;
+import com.codegenerate.designmanage.service.Contract_manageService;
 import com.codegenerate.designmanage.service.Pp_demolition_imgService;
 import com.codegenerate.designmanage.service.Pp_design_imgService;
 import com.codegenerate.designmanage.service.Pp_done_imgService;
@@ -61,6 +66,41 @@ public class HtmlResource {
     	JSONObject jsonObject = new JSONObject();
     	jsonObject.put("name", "hello");
         return jsonObject;
+    }
+    /**
+     * 保存数据
+     * @param customername
+     * @param customerphone
+     * @param address
+     * @param remark
+     * @return
+     */
+    @POST
+    @GET
+    @Path("senddatabyindexhtml")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JSONObject sendDataByIndexHtml(@QueryParam("customername") String customername, @QueryParam("customerphone") String customerphone,
+    		@QueryParam("address") String address,@QueryParam("remark") String remark) {
+		try {
+			//
+			Contract_manageEntity entity = new Contract_manageEntity();
+			entity.setCustomername(URLDecoder.decode(customername, "utf-8"));
+			// entity.setProjectname(projectname);
+			// entity.setContracturl(contracturl);
+			entity.setAddress(URLDecoder.decode(address, "utf-8"));
+			entity.setCustomerphone(URLDecoder.decode(customerphone, "utf-8"));
+			entity.setRemark(URLDecoder.decode(remark, "utf-8"));
+			entity.setId(UUID.randomUUID().toString());
+			// entity.setScopeid(scopeid);
+			entity.setTypeflag("未签");
+			entity.setAddress(address);
+
+			getContract_manageService().insert(entity);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		JSONObject jsonObject = new JSONObject();
+		return jsonObject;
     }
     
     /**
@@ -161,11 +201,15 @@ public class HtmlResource {
     public CmsArticleService getCmsArticleService() {
         return ApplicationContextHelper.getBean(CmsArticleService.class);
     }
+    // 合同管理service
+    public Contract_manageService getContract_manageService() {
+        return ApplicationContextHelper.getBean(Contract_manageService.class);
+    }
     // 进度管理
     public Project_progressService getProject_progressService() {
         return ApplicationContextHelper.getBean(Project_progressService.class);
     }
-    // 
+    // 进度管理相关 img service
     public Pp_demolition_imgService getPp_demolition_imgService() {
         return ApplicationContextHelper.getBean(Pp_demolition_imgService.class);
     }
