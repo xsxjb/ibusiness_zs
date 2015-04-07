@@ -41,7 +41,9 @@ import com.codegenerate.designmanage.service.Pp_water_imgService;
 import com.codegenerate.designmanage.service.Project_progressService;
 import com.ibusiness.base.group.dao.OrgCompanyDao;
 import com.ibusiness.cms.entity.CmsArticle;
+import com.ibusiness.cms.entity.IndeximgbyworksEntity;
 import com.ibusiness.cms.service.CmsArticleService;
+import com.ibusiness.cms.service.IndeximgbyworksService;
 import com.ibusiness.common.util.CommonUtils;
 import com.ibusiness.core.spring.ApplicationContextHelper;
 /**
@@ -63,16 +65,18 @@ public class HtmlResource {
     @Path("initdata")
     @Produces(MediaType.APPLICATION_JSON)
     public JSONObject initdata() {
-    	JSONObject jsonObject = new JSONObject();
-    	jsonObject.put("name", "hello");
-        return jsonObject;
+    	// 查询文章信息列表
+    	JSONArray cmsArray = cmsArticleList();
+    	JSONObject json = new JSONObject();
+    	json.put("cmslist", cmsArray);
+    	// 图片
+    	List<IndeximgbyworksEntity> imgbyworkslist = getIndeximgbyworksService().getAll();
+    	JSONArray imgbyworksArray = CommonUtils.getJsonFromList(imgbyworkslist, null);
+    	json.put("imglist", imgbyworksArray);
+        return json;
     }
     /**
      * 保存数据
-     * @param customername
-     * @param customerphone
-     * @param address
-     * @param remark
      * @return
      */
     @POST
@@ -81,23 +85,21 @@ public class HtmlResource {
     @Produces(MediaType.APPLICATION_JSON)
     public JSONObject sendDataByIndexHtml(@QueryParam("customername") String customername, @QueryParam("customerphone") String customerphone,
     		@QueryParam("address") String address,@QueryParam("remark") String remark) {
-		try {
-			//
-			Contract_manageEntity entity = new Contract_manageEntity();
-			entity.setCustomername(URLDecoder.decode(customername, "utf-8"));
-			// entity.setProjectname(projectname);
-			// entity.setContracturl(contracturl);
-			entity.setAddress(URLDecoder.decode(address, "utf-8"));
-			entity.setCustomerphone(URLDecoder.decode(customerphone, "utf-8"));
-			entity.setRemark(URLDecoder.decode(remark, "utf-8"));
-			entity.setId(UUID.randomUUID().toString());
-			// entity.setScopeid(scopeid);
-			entity.setTypeflag("未签");
-			entity.setAddress(address);
+		if (!CommonUtils.isNull(customername)) {
+			try {
+				//
+				Contract_manageEntity entity = new Contract_manageEntity();
+				entity.setCustomername(URLDecoder.decode(customername, "utf-8"));
+				entity.setAddress(URLDecoder.decode(address, "utf-8"));
+				entity.setCustomerphone(URLDecoder.decode(customerphone, "utf-8"));
+				entity.setRemark(URLDecoder.decode(remark, "utf-8"));
+				entity.setId(UUID.randomUUID().toString());
+				entity.setTypeflag("未签");
 
-			getContract_manageService().insert(entity);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+				getContract_manageService().insert(entity);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
 		JSONObject jsonObject = new JSONObject();
 		return jsonObject;
@@ -118,6 +120,7 @@ public class HtmlResource {
     		JSONObject jsonObject = new JSONObject();
     		jsonObject.put("title", bean.getTitle());
     		jsonObject.put("id", bean.getId());
+    		jsonObject.put("createTime", CommonUtils.getInstance().getYmd().format(bean.getCreateTime()));
     		jsonArray.add(jsonObject);
     	}
         return jsonArray;
@@ -196,6 +199,10 @@ public class HtmlResource {
     // 用户
     public OrgCompanyDao getOrgCompanyDao() {
         return ApplicationContextHelper.getBean(OrgCompanyDao.class);
+    }
+    // 首页图片管理
+    public IndeximgbyworksService getIndeximgbyworksService() {
+        return ApplicationContextHelper.getBean(IndeximgbyworksService.class);
     }
     // 公告文章管理表 Service
     public CmsArticleService getCmsArticleService() {

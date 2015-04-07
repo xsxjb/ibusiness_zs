@@ -35,10 +35,38 @@
 	<script src="js/jquery.scrollTo.js"></script>
 	<script src="js/jquery.appear.js"></script>
 	<script src="js/stellar.js"></script>
+	<!--  -->
 	<script src="js/wow.min.js"></script>
+	
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/nivo-lightbox.min.js"></script>
 
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="dist/css/swiper.min.css">
+    <!-- Swiper JS -->
+    <script src="dist/js/swiper.min.js"></script>
+    <!-- Demo styles -->
+    <style>
+    body {
+        background: #fff;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-container {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 300px;
+    }
+    </style>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -163,22 +191,8 @@
             <div class="col-md-6">
                 <h3 class="h-bold text-center">新闻公告</h3>
                 <div class="mBd">
-					<ul class="newsList">
-						<li>
-							 <span class="date">01-02</span> <a href="#">红木家具保养七绝技</a>
-						</li>
-						<li>
-							 <span class="date">01-02</span> <a href="#">何时购买红木家具最合适？</a>
-						</li>
-						<li>
-							 <span class="date">01-02</span> <a href="#">红木家具绿色环保</a>
-						</li>
-						<li>
-							 <span class="date">01-02</span> <a href="#">选购和定制家具，消费者如…</a>
-						</li>
-						<li>
-							 <span class="date">01-02</span> <a href="#">享受古典家具 红木家具难弃爱</a>
-						</li>
+					<ul id="newsListul" class="newsList">
+						
 					</ul>
 				</div>
 				
@@ -280,24 +294,19 @@
 			</div>
 		</div>
 
-		<div class="container">
-			<div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12" >
-					<div class="wow bounceInUp" data-wow-delay="0.4s">
-                    <div id="owl-works" class="owl-carousel">
-                        <div class="item"><a href="img/works/1.jpg" title="展示图片1" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1.jpg"><img src="img/works/1.jpg" class="img-responsive" alt="img"></a></div>
-                        <div class="item"><a href="img/works/2.jpg" title="展示图片2" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2.jpg"><img src="img/works/2.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/works/3.jpg" title="展示图片3" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3.jpg"><img src="img/works/3.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/works/4.jpg" title="展示图片4" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4.jpg"><img src="img/works/4.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/works/5.jpg" title="展示图片5" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/5.jpg"><img src="img/works/5.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/works/6.jpg" title="展示图片6" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/6.jpg"><img src="img/works/6.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/works/7.jpg" title="展示图片7" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/7.jpg"><img src="img/works/7.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/works/8.jpg" title="展示图片8" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/8.jpg"><img src="img/works/8.jpg" class="img-responsive " alt="img"></a></div>
-                    </div>
-					</div>
-                </div>
-            </div>
-		</div>
+        <!-- 左右滑动  -->
+		<!-- Swiper -->
+	    <div class="swiper-container">
+	        <div id="indeximgdiv" class="swiper-wrapper">
+	            
+	        </div>
+	        <!-- Add Pagination -->
+	        <div class="swiper-pagination"></div>
+			<!-- 左右箭头 -->
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+	    </div>
+		
 	</section>
 	
 	<!-- 联系我们 -->
@@ -318,7 +327,7 @@
 		<div class="container">
 			<div class="row marginbot-80">
 				<div class="col-md-8 col-md-offset-2">
-					<form id="contact-form" class="wow bounceInUp" data-wow-offset="10" data-wow-delay="0.2s">
+					<form id="contact-form" action="/portal/rs/html/senddatabyindexhtml" method="post" class="wow bounceInUp" data-wow-offset="10" data-wow-delay="0.2s">
 						<div class="row marginbot-20">
 							<div class="col-md-12">
 						        <label class="col-lg-2 control-label" >姓名:</label>
@@ -347,7 +356,7 @@
 							</div>
 						</div>
 						<div class="col-lg-10 col-lg-offset-2">
-							<button type="submit" onclick="senddata();" class="btn btn-primary btn-sm a-submit" >发送</button>
+							<a href="#" onclick="senddata();" class="btn btn-primary btn-sm" >发送</a>
 						</div>
 					</form>
 				</div>
@@ -365,8 +374,8 @@
 						    <a href="#intro" class="totop"><i class="glyphicon glyphicon-chevron-up"></i></a>
 						</div>
 						<div class="col-lg-6" >
-							<p>地址:黑龙江省哈尔滨市道里区<br />
-							<p>电话:0451-88888888 18888888888<br />
+							<p>地址:哈尔滨市南岗区哈尔滨大街93号(金域蓝城)<br />
+							<p>电话:0451-86645005  0451-86645005<br />
 							<p>Q Q:88888888<br />
 						</div>
 						<div class="col-lg-6" >
@@ -391,8 +400,19 @@
 	  </div>
 	</div>
 	
-	<!-- 横向滑动 -->
-    <script type="text/javascript" src="js/custom.js"></script>
+	<!-- 图片展示 -->
+	<div class="modal fade" id="showImgModal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span >&times;</span><span class="sr-only">Close</span></button></div>
+		  <div class="modal-body text-center">
+			<img id="showImg" style="width: 100%; height: 100%; display: block;" src="" />
+		  </div>
+		  <div class="modal-footer"></div>
+		</div>
+	  </div>
+	</div>
+	
     <!-- JS方法 -->
     <script>
         <!-- 数据初始化 -->
@@ -401,12 +421,11 @@
 			$('#waitingModal').modal('show');
 			// 调用初始化方法
 			var urlstr = "/portal/rs/html/initdata";
-			var initdata = '{"userId":"'+localStorage.getItem("userid")+'"}';
+			var initdata = "{customername:'姜博'}";
 			$.ajax({
 				type: "post",
 			    url: urlstr,
 				dataType: "json",
-			//	async: false,
 			//	data: initdata,
 				success: function(json){
 					// 顶部图片
@@ -430,6 +449,22 @@
 					// ===============================================
 					// 隐藏
 					$('#waitingModal').modal('hide');
+					// 新闻信息
+					var cmslist = json.cmslist;
+					for(var i=0; i<cmslist.length; i++){
+						var content = "";
+						content = content + '<li><span class="date">'+cmslist[i].createTime+'</span><a href="cms-article-view.html?id='+cmslist[i].id+'">' + cmslist[i].title + '</a></li>';
+						$("#newsListul").append(content);
+					}
+					// 作品展示图片
+					var imglist = json.imglist;
+					for(var i=0; i<imglist.length; i++){
+						var imgContent = "";
+						imgContent = imgContent + '<div class="swiper-slide"><a href="#" class="img-thumbnail" onClick="setImgModal(\'../../ibresources/imgworks/'+imglist[i].imgurl+'\');return false;"><img src="../../ibresources/imgworks/'+imglist[i].imgurl+'" height="250px" width="250px"></a></div>';
+					    $("#indeximgdiv").append(imgContent);
+					}
+					// 设置图片展示组件
+					setSwiper();
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown){
 					$('#waitingModal').modal('hide');
@@ -438,11 +473,31 @@
 			});
 		}
 		initData();
+		// 设置图片展示组件
+		function setSwiper() {
+		    var swiper = new Swiper('.swiper-container', {
+		        pagination: '.swiper-pagination',
+				nextButton: '.swiper-button-next',
+		        prevButton: '.swiper-button-prev',
+		
+		        effect: 'coverflow',
+		        grabCursor: true,
+		        centeredSlides: true,
+		        slidesPerView: 'auto',
+		        coverflow: {
+		            rotate: 50,
+		            stretch: 0,
+		            depth: 100,
+		            modifier: 1,
+		            slideShadows : true
+		        }
+		    });
+		}
 		// 发送信息
 		function senddata() {
 			$('#waitingModal').modal('show');
 			// 
-			var customername = encodeURI(encodeURI($("#customername").val()));
+			var customername=encodeURI(encodeURI($("#customername").val()));
 			var customerphone=encodeURI(encodeURI($("#customerphone").val()));
 			var address=encodeURI(encodeURI($("#address").val()));
 			var remark=encodeURI(encodeURI($("#remark").val()));
@@ -465,7 +520,13 @@
 				}
 			});
 		}
-	</script>
+		
+		// 设置弹出图片modal
+		function setImgModal(url) {
+			$("#showImg").attr("src", url);
+			$('#showImgModal').modal('show');
+		}
+    </script>
 </body>
 
 </html>
